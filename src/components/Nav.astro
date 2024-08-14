@@ -1,0 +1,14 @@
+---
+const pages = ["dev", "art", "about"];
+---
+
+<nav>
+  {pages.map((page) => <a href={`/${page}`}>{page}</a>)}
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    gap: 10px;
+  }
+</style>

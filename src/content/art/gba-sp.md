@@ -1,7 +1,7 @@
 ---
-title: Explorer's Room
+title: GBA SP
 coverArt:
-  src: ../../images/explorers-room-cover.png
+  src: ../../images/gba-sp-cover.png
   alt: Cover art
 rows:
   - type: text
@@ -11,9 +11,7 @@ rows:
       - Unreal Engine
       - Substance Painter
       - Substance Designer
-      - Marvelous Designer
+      - Marvelous Designer,
       - TreeIt
       - Marmoset Toolbag
 ---
-
-hello world

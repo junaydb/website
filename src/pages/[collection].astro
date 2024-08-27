@@ -1,0 +1,29 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import type { ContentCollectionKey } from "astro:content";
+import path from "path";
+
+export function getStaticPaths() {
+  const glob = import.meta.glob("../content/**");
+  const collections = Object.keys(glob).map((filepath) => ({
+    params: {
+      collection: path.basename(path.dirname(filepath)) as ContentCollectionKey,
+    },
+  }));
+  return collections;
+}
+
+const { collection } = Astro.params;
+const posts = await getCollection(collection);
+---
+
+<BaseLayout title={posts[0].collection}>
+  <div class="bordered-list">
+    {
+      posts.map((post) => (
+        <a href={`${post.collection}/${post.slug}`}>{post.data.title}</a>
+      ))
+    }
+  </div>
+</BaseLayout>

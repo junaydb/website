@@ -1,14 +1,33 @@
 ---
-const pages = ["dev", "art", "about"];
+const pages = ["dev", "art"];
 ---
 
 <nav>
-  {pages.map((page) => <a href={`/${page}`}>{page}</a>)}
+  <a href="/">JUNAYD BHOYROO</a>
+  <div>
+    {pages.map((page) => <a href={`/${page}`}>{page}</a>)}
+  </div>
 </nav>
 
-<style>
+<style lang="scss">
+  @use "../style/global.scss";
+
   nav {
     display: flex;
-    gap: 10px;
+    margin-bottom: var(--separation-margin);
+    padding: var(--border-width);
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-colour);
+    text-transform: uppercase;
+    div {
+      display: flex;
+      gap: var(--border-width);
+      background-color: var(--primary-colour);
+    }
+    a {
+      @extend .bordered-list-link;
+      flex-grow: 0;
+    }
   }
 </style>

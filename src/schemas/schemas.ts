@@ -1,21 +1,35 @@
 import { z } from "astro:content";
 
-export const artCollectionSchema = z.object({
-	layout: z.string(),
-	title: z.string(),
-	publishDate: z.date(),
-	coverArt: z.object({
-		src: z.string(),
-		alt: z.string(),
-	}),
-	softwareList: z.string().array(),
+const textRow = z.object({
+  type: z.literal("text"),
+  title: z.string(),
+  items: z.string().array(),
 });
-export type ArtCollectionSchema = z.infer<typeof artCollectionSchema>;
+const linkRow = z.object({
+  type: z.literal("links"),
+  title: z.string(),
+  items: z
+    .object({
+      text: z.string(),
+      href: z.string().url(),
+    })
+    .array(),
+});
+const textRowOrLinkRow = z.union([textRow, linkRow]);
 
-export const devCollectionSchema = z.object({
-	layout: z.string(),
-	title: z.string(),
-	publishDate: z.date(),
-	softwareList: z.string().array(),
+export const collectionSchema = z.object({
+  /* required */
+  title: z.string(),
+
+  /* optionals */
+  layout: z.string().optional(),
+
+  coverArt: z
+    .object({
+      src: z.string(),
+      alt: z.string(),
+    })
+    .optional(),
+
+  rows: textRowOrLinkRow.array().optional(),
 });
-export type DevCollectionSchema = z.infer<typeof devCollectionSchema>;

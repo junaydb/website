@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import type { ContentCollectionKey } from "astro:content";
+import path from "path";
+
+export async function getStaticPaths() {
+  const glob = import.meta.glob("../../content/**");
+
+  const allCollections = Object.keys(glob).map(
+    (filepath) => path.basename(path.dirname(filepath)) as ContentCollectionKey,
+  );
+
+  const allPosts = await Promise.all(
+    allCollections.map((name) => getCollection(name)),
+  );
+
+  return allPosts.flat().map((post) => ({
+    params: { collection: post.collection, slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const date = new Date();
+---
+
+<BaseLayout title={post.data.title}>
+  <div class="bordered-list labelled">
+    <h2>last updated</h2>
+    <p>
+      {date.toLocaleString("en-GB").slice(0, 10)} @ {date.toLocaleTimeString()}
+    </p>
+    {
+      post.data.rows?.map((row) => {
+        if (row.type == "text") {
+          return (
+            <>
+              <h2>{row.title}</h2>
+              <div>
+                {row.items.map((item) => (
+                  <p>{item}</p>
+                ))}
+              </div>
+            </>
+          );
+        } else if (row.type == "links") {
+          return (
+            <>
+              <h2>{row.title}</h2>
+              <div>
+                {row.items.map((item) => (
+                  <a href={item.href}>{item.text}</a>
+                ))}
+              </div>
+            </>
+          );
+        }
+      })
+    }
+  </div>
+  <h1>{post.data.title}</h1>
+  <Content />
+</BaseLayout>

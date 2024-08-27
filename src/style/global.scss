@@ -1,0 +1,95 @@
+:root {
+  --primary-colour: #dad7cd;
+  --secondary-colour: #344e41;
+  --accent-colour: #a3b18a;
+  --border-width: 1px;
+  --link-padding: 8px 12px 8px 12px;
+  --separation-margin: 12px;
+}
+
+* {
+  color: var(--primary-colour);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  list-style-type: none;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+::selection {
+  background: var(--accent-colour);
+}
+
+body {
+  background-color: var(--secondary-colour);
+}
+
+main {
+  margin: auto;
+  margin-top: 4vh;
+  width: 90%;
+}
+
+.bordered-list {
+  display: grid;
+  margin-bottom: var(--separation-margin);
+  grid-gap: var(--border-width);
+  padding: var(--border-width);
+  background-color: var(--primary-colour);
+  text-transform: uppercase;
+
+  // nested divs become row lists 
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: var(--border-width);
+  }
+
+  :not(div, a) {
+    @extend .bordered-list-element;
+  }
+
+  a {
+    @extend .bordered-list-link;
+  }
+
+  // adding class `labelled` turns `bordered-list` into a two column grid,
+  // where the first column is expected to be used for row labels. labels are 
+  // expected to be h2 elements, hence h2 elements are forced to be in the 
+  // first column.
+  &.labelled {
+    grid-template-columns: auto 1fr;
+
+    h2 {
+      grid-column: 1;
+    }
+  }
+}
+
+.bordered-list-element {
+  padding: 8px 12px 8px 12px;
+  background-color: var(--secondary-colour);
+  flex-grow: 1;
+}
+
+.bordered-list-link {
+  @extend .bordered-list-element;
+
+  &:hover {
+    color: var(--secondary-colour);
+    background-color: var(--primary-colour);
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    width: 600px;
+  }
+}

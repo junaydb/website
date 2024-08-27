@@ -1,17 +1,17 @@
 import { defineCollection } from "astro:content";
-import { artCollectionSchema, devCollectionSchema } from "src/schemas/schemas";
+import { collectionSchema } from "src/schemas/schemas";
 
 const artCollection = defineCollection({
-	type: "content",
-	schema: artCollectionSchema,
+  type: "content",
+  schema: collectionSchema,
 });
 
 const devCollection = defineCollection({
-	type: "content",
-	schema: devCollectionSchema,
+  type: "content",
+  schema: collectionSchema,
 });
 
 export const collections = {
-	art: artCollection,
-	dev: devCollection,
+  art: artCollection,
+  dev: devCollection,
 };

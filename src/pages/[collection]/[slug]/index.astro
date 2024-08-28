@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { getAllCollections } from "src/helpers/getAllCollections";
+import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
 
 export async function getStaticPaths() {
-  const allCollections = getAllCollections();
+  const allCollections = getAllCollectionNames();
   const allPosts = await Promise.all(
     allCollections.map((name) => getCollection(name)),
   );

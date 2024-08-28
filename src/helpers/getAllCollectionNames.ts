@@ -1,7 +1,7 @@
 import path from "path";
 import type { ContentCollectionKey } from "astro:content";
 
-export function getAllCollections() {
+export function getAllCollectionNames() {
   const glob = import.meta.glob("../content/*/*");
   const dirs = [
     ...new Set(

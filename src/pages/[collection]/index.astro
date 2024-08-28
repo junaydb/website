@@ -1,14 +1,12 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import type { ContentCollectionKey } from "astro:content";
-import path from "path";
+import { getAllCollections } from "../../helpers/getAllCollections";
 
 export function getStaticPaths() {
-  const glob = import.meta.glob("../content/**");
-  const collections = Object.keys(glob).map((filepath) => ({
+  const collections = getAllCollections().map((dir) => ({
     params: {
-      collection: path.basename(path.dirname(filepath)) as ContentCollectionKey,
+      collection: dir,
     },
   }));
   return collections;

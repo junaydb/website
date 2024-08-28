@@ -12,7 +12,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "IBM Plex Mono", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "IBM Plex Mono";
   text-decoration: none;
   list-style-type: none;
   font-weight: inherit;
@@ -20,7 +20,6 @@
   font-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 ::selection {
@@ -35,6 +34,10 @@ main {
   margin: auto;
   margin-top: 4vh;
   width: 90%;
+}
+
+p {
+  font-family: 'Inter Variable';
 }
 
 .bordered-list {
@@ -77,6 +80,7 @@ main {
   padding: 8px 12px 8px 12px;
   background-color: var(--secondary-colour);
   flex-grow: 1;
+  font-family: "IBM Plex Mono";
 }
 
 .bordered-list-link {

@@ -1,20 +1,13 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import type { ContentCollectionKey } from "astro:content";
-import path from "path";
+import { getAllCollections } from "src/helpers/getAllCollections";
 
 export async function getStaticPaths() {
-  const glob = import.meta.glob("../../content/**");
-
-  const allCollections = Object.keys(glob).map(
-    (filepath) => path.basename(path.dirname(filepath)) as ContentCollectionKey,
-  );
-
+  const allCollections = getAllCollections();
   const allPosts = await Promise.all(
     allCollections.map((name) => getCollection(name)),
   );
-
   return allPosts.flat().map((post) => ({
     params: { collection: post.collection, slug: post.slug },
     props: { post },
@@ -28,9 +21,9 @@ const date = new Date();
 
 <BaseLayout title={post.data.title}>
   <div class="bordered-list labelled">
-    <h2>last updated</h2>
+    <h2>title</h2>
     <p>
-      {date.toLocaleString("en-GB").slice(0, 10)} @ {date.toLocaleTimeString()}
+      {post.data.title}
     </p>
     {
       post.data.rows?.map((row) => {
@@ -59,7 +52,10 @@ const date = new Date();
         }
       })
     }
+    <h2>last updated</h2>
+    <p>
+      {date.toLocaleString("en-GB").slice(0, 10)} @ {date.toLocaleTimeString()}
+    </p>
   </div>
-  <h1>{post.data.title}</h1>
   <Content />
 </BaseLayout>

@@ -16,4 +16,4 @@ rows:
       - Marmoset Toolbag
 ---
 
-hello world
+A project done to learn about creating environments for games.

@@ -1,5 +1,5 @@
 ---
-title: Building this site (why you should use Astro)
+title: Building this site with Astro
 rows:
   - type: text
     title: technology 

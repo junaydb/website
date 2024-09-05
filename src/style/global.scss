@@ -13,12 +13,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "IBM Plex Mono";
-  text-decoration: none;
-  list-style-type: none;
   font-weight: inherit;
   font-style: inherit;
-  font-size: 100%;
-  overflow: hidden;
+  font-size: 13px;
+  text-decoration: none;
+  list-style-type: none;
   text-overflow: ellipsis;
 }
 
@@ -38,6 +37,7 @@ main {
 
 p {
   font-family: 'Inter Variable';
+  line-height: 1.4rem;
 }
 
 .bordered-list {
@@ -81,6 +81,7 @@ p {
   background-color: var(--secondary-colour);
   flex-grow: 1;
   font-family: "IBM Plex Mono";
+  line-height: normal;
 }
 
 .bordered-list-link {
@@ -93,6 +94,10 @@ p {
 }
 
 @media (min-width: 768px) {
+  * {
+    font-size: 15px;
+  }
+
   main {
     width: 600px;
   }

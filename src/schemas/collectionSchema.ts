@@ -23,13 +23,11 @@ export const collectionSchema = z.object({
 
   /* optionals */
   layout: z.string().optional(),
-
   coverArt: z
     .object({
       src: z.string(),
       alt: z.string(),
     })
     .optional(),
-
   rows: textRowOrLinkRow.array().optional(),
 });

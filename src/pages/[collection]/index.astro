@@ -20,7 +20,9 @@ const posts = await getCollection(collection);
   <div class="bordered-list">
     {
       posts.map((post) => (
-        <a href={`${post.collection}/${post.slug}`}>{post.data.title}</a>
+        <a href={`${post.collection}/${post.slug}`} data-astro-prefetch="hover">
+          {post.data.title}
+        </a>
       ))
     }
   </div>

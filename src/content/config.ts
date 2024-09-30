@@ -1,13 +1,14 @@
 import { defineCollection } from "astro:content";
 import { collectionSchema } from "src/schemas/collectionSchema";
+import { glob } from "astro/loaders";
 
 const artCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/[^_]*.mdx", base: "./src/content-v5/art" }),
   schema: collectionSchema,
 });
 
 const devCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content-v5/dev" }),
   schema: collectionSchema,
 });
 

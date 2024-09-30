@@ -17,10 +17,13 @@ const posts = await getCollection(collection);
 ---
 
 <BaseLayout title={posts[0].collection}>
-  <div class="bordered-list">
+  <div>
     {
       posts.map((post) => (
-        <a href={`${post.collection}/${post.slug}`} data-astro-prefetch="hover">
+        <a
+          href={`/${post.collection}/${post.slug}`}
+          data-astro-prefetch="hover"
+        >
           {post.data.title}
         </a>
       ))

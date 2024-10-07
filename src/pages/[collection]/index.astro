@@ -1,8 +1,19 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
 
-const posts = await getCollection("art");
+export function getStaticPaths() {
+  const collections = getAllCollectionNames().map((dir) => ({
+    params: {
+      collection: dir,
+    },
+  }));
+  return collections;
+}
+
+const { collection } = Astro.params;
+const posts = await getCollection(collection);
 ---
 
 <BaseLayout title={posts[0].collection}>

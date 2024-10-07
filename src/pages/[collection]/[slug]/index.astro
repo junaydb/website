@@ -1,12 +1,16 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("dev");
-  return entries.map((post) => ({
-    params: { slug: post.id },
-    props: { post: post },
+  const allCollections = getAllCollectionNames();
+  const allPosts = await Promise.all(
+    allCollections.map((name) => getCollection(name)),
+  );
+  return allPosts.flat().map((post) => ({
+    params: { collection: post.collection, slug: post.id },
+    props: { post },
   }));
 }
 

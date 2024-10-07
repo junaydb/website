@@ -1,7 +1,7 @@
 :root {
-  --primary-colour: #dad7cd;
-  --secondary-colour: #344e41;
-  --accent-colour: #a3b18a;
+  --primary-colour: rgb(200, 200, 200);
+  --secondary-colour: rgb(10, 10, 10);
+  --accent-colour: #ff0000;
   --border-width: 1px;
   --link-padding: 8px 12px 8px 12px;
   --separation-margin: 12px;
@@ -36,10 +36,9 @@ main {
 }
 
 p {
-  font-family: 'Inter Variable';
+  font-family: "Inter Variable";
   line-height: 1.4rem;
 }
-
 
 /* Animations */
 .skeleton {

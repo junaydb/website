@@ -1,8 +1,9 @@
 :root {
-  --primary-colour: rgb(200, 200, 200);
+  --primary-colour: rgb(220, 220, 220);
   --secondary-colour: rgb(10, 10, 10);
   --accent-colour: #ff0000;
   --border-width: 1px;
+  --border-radius: 1px;
   --link-padding: 8px 12px 8px 12px;
   --separation-margin: 12px;
 }
@@ -26,13 +27,10 @@
 }
 
 body {
-  background-color: var(--secondary-colour);
-}
-
-main {
   margin: auto;
   margin-top: 4vh;
   width: 90%;
+  background-color: var(--secondary-colour);
 }
 
 p {
@@ -58,13 +56,13 @@ p {
   }
 }
 
-/* Media queries */
+/* Width > 640px */
 @media (min-width: 768px) {
   * {
     font-size: 15px;
   }
 
-  main {
+  body {
     width: 600px;
   }
 }

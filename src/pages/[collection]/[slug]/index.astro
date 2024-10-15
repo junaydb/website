@@ -16,15 +16,13 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const date = new Date();
 ---
 
 <BaseLayout title={post.data.title}>
   <div>
-    <h2>title</h2>
-    <p>
+    <h1>
       {post.data.title}
-    </p>
+    </h1>
     {
       post.data.rows?.map((row) => {
         if (row.type == "text") {
@@ -38,7 +36,8 @@ const date = new Date();
               </div>
             </>
           );
-        } else if (row.type == "links") {
+        }
+        if (row.type == "links") {
           return (
             <>
               <h2>{row.title}</h2>
@@ -52,10 +51,6 @@ const date = new Date();
         }
       })
     }
-    <h2>last updated</h2>
-    <p>
-      {date.toLocaleString("en-GB").slice(0, 10)} @ {date.toLocaleTimeString()}
-    </p>
   </div>
   <Content />
 </BaseLayout>

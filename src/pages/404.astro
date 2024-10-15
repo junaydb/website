@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import bliss from "../assets/owr/bliss-hardware.png";
+---
+
+<BaseLayout title="404">
+  <h1>404</h1>
+  <p>Are you lost?</p>
+  <Image src={bliss} alt="Bliss artwork" loading="eager" />
+</BaseLayout>
+
+<style lang="scss">
+  h1 {
+    font-size: 32px;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+</style>

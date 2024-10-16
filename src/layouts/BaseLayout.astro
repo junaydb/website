@@ -2,6 +2,7 @@
 import "@fontsource/ibm-plex-mono";
 import ibmPlexMono from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url";
 import "@fontsource-variable/inter";
+import inter from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import "../style/global.scss";
 import Nav from "@components/Nav.astro";
 
@@ -24,6 +25,13 @@ const { title } = Astro.props;
       as="font"
       type="font/woff2"
       href={ibmPlexMono}
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={inter}
       crossorigin="anonymous"
     />
     <meta name="generator" content={Astro.generator} />

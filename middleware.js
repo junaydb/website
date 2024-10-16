@@ -1,3 +1,7 @@
+export const config = {
+  matcher: ["/", "/art/:path*", "/dev/:path*"],
+};
+
 import { rewrite } from "@vercel/edge";
 
 export default function middleware(request) {

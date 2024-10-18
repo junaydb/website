@@ -1,6 +1,64 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
+
+const allCollectionNames = getAllCollectionNames();
+const allCollections = await Promise.all(
+  allCollectionNames.map((name) => getCollection(name)),
+);
+
+allCollections.forEach((collection) => {
+  collection.sort((a, b) => a.data.order - b.data.order);
+});
 ---
 
 <BaseLayout title="Home">
+  <div class="posts section">
+    {
+      allCollections.map((collection, i) => {
+        return (
+          <div>
+            <h2>{allCollectionNames[i]}</h2>
+            {collection.map((post) => (
+              <div class={post.collection}>
+                <a href={`${post.collection}/${post.id}`}>{post.data.title}</a>
+              </div>
+            ))}
+          </div>
+        );
+      })
+    }
+  </div>
+  <div>
+    <h2>Contact</h2>
+    <p>contact@junayd.com</p>
+  </div>
 </BaseLayout>
+
+<style lang="scss">
+  .posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .section {
+    margin-bottom: var(--separation-margin);
+  }
+
+  a {
+    display: block;
+    width: fit-content;
+    padding: var(--heading-margin) var(--inset-margin) var(--heading-margin)
+      var(--inset-margin);
+    margin: 0px 0px 0px calc(var(--inset-margin) * -1);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-bg);
+    transition: all 0.1s;
+
+    &:hover {
+      background-color: rgb(31, 31, 31);
+      border: 1px solid rgb(46, 46, 46);
+    }
+  }
+</style>

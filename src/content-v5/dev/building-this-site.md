@@ -1,8 +1,9 @@
 ---
 title: Building this site with Astro
+order: 1
 rows:
   - type: text
-    title: technology 
+    title: Technology 
     items:
       - Typescript
       - Astro

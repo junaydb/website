@@ -2,10 +2,12 @@
   --primary-colour: rgb(220, 220, 220);
   --secondary-colour: rgb(10, 10, 10);
   --accent-colour: #ff0000;
-  --border-width: 1px;
   --border-radius: 1px;
+  --border-radius-bg: 6px;
   --link-padding: 8px 12px 8px 12px;
-  --separation-margin: 12px;
+  --separation-margin: 22px;
+  --heading-margin: 6px;
+  --inset-margin: 8px;
 }
 
 * {
@@ -16,7 +18,6 @@
   font-family: "IBM Plex Mono";
   font-weight: inherit;
   font-style: inherit;
-  font-size: 13px;
   text-decoration: none;
   list-style-type: none;
   text-overflow: ellipsis;
@@ -33,8 +34,19 @@ body {
   background-color: var(--secondary-colour);
 }
 
-p {
-  font-family: "Inter Variable";
+footer {
+  height: 28px;
+}
+
+h2 {
+  font-size: 13px;
+  margin-bottom: var(--heading-margin);
+  text-transform: capitalize;
+}
+
+p,
+a {
+  font-size: 14px;
   line-height: 1.4rem;
 }
 

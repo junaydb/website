@@ -2,13 +2,13 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
+import type { linkRowType } from "@schemas/collectionSchema";
 
 export async function getStaticPaths() {
-  const allCollections = getAllCollectionNames();
-  const allPosts = await Promise.all(
-    allCollections.map((name) => getCollection(name)),
+  const allCollections = await Promise.all(
+    getAllCollectionNames().map((name) => getCollection(name)),
   );
-  return allPosts.flat().map((post) => ({
+  return allCollections.flat().map((post) => ({
     params: { collection: post.collection, slug: post.id },
     props: { post },
   }));
@@ -19,38 +19,59 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-  <div>
+  <div class="section">
+    <h2>Title</h2>
     <h1>
       {post.data.title}
     </h1>
+  </div>
+
+  <div class="section">
     {
       post.data.rows?.map((row) => {
-        if (row.type == "text") {
-          return (
-            <>
-              <h2>{row.title}</h2>
-              <div>
-                {row.items.map((item) => (
+        return (
+          <>
+            <h2>{row.title}</h2>
+            <div class="items">
+              {row.items.map((item) =>
+                row.type == "text" ? (
                   <p>{item}</p>
-                ))}
-              </div>
-            </>
-          );
-        }
-        if (row.type == "links") {
-          return (
-            <>
-              <h2>{row.title}</h2>
-              <div>
-                {row.items.map((item) => (
-                  <a href={item.href}>{item.text}</a>
-                ))}
-              </div>
-            </>
-          );
-        }
+                ) : (
+                  <a href={(item as linkRowType).href}>
+                    {(item as linkRowType).text}
+                  </a>
+                ),
+              )}
+            </div>
+          </>
+        );
       })
     }
   </div>
+  <h2>Description</h2>
   <Content />
 </BaseLayout>
+
+<style lang="scss">
+  .section {
+    margin-bottom: var(--separation-margin);
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    p,
+    a {
+      font-size: 13px;
+      text-align: center;
+      padding: var(--heading-margin) var(--inset-margin) var(--heading-margin)
+        var(--inset-margin);
+      margin: 0px calc(var(--inset-margin) * -1) px 0px
+        calc(var(--inset-margin) * -1);
+      background-color: rgb(31, 31, 31);
+      border: 1px solid rgb(46, 46, 46);
+      border-radius: var(--border-radius-bg);
+    }
+  }
+</style>

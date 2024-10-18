@@ -5,6 +5,7 @@ const textRow = z.object({
   title: z.string(),
   items: z.string().array(),
 });
+
 const linkRow = z.object({
   type: z.literal("links"),
   title: z.string(),
@@ -15,13 +16,17 @@ const linkRow = z.object({
     })
     .array(),
 });
+
 const textRowOrLinkRow = z.union([textRow, linkRow]);
 
-export const collectionSchema = z.object({
-  /* required */
-  title: z.string(),
+export type linkRowType = z.infer<typeof linkRow.shape.items.element>;
 
-  /* optionals */
+export const collectionSchema = z.object({
+  // required
+  title: z.string(),
+  order: z.number(),
+
+  // optionals
   layout: z.string().optional(),
   coverArt: z
     .object({

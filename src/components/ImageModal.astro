@@ -1,21 +1,20 @@
 ---
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import { Image, inferRemoteSize } from "astro:assets";
 
 interface Props {
-  src: ImageMetadata;
+  src: string;
   alt: string;
 }
 
 const { src, alt } = Astro.props;
-const imageWidth = src.width;
-const imageHeight = src.height;
+
+const { width: imageWidth, height: imageHeight } = await inferRemoteSize(src);
 ---
 
 <div class="image-modal-container">
-  <Image src={src} alt={alt} class="thumbnail" loading="lazy" />
+  <img data-src={src} alt={alt} class="thumbnail lazy" />
   <dialog class="modal">
-    <Image src={src} alt={alt} class="full-size" quality="max" />
+    <Image src={src} alt={alt} inferSize class="full-size" loading="lazy" />
     <div class="modal-background"></div>
   </dialog>
 </div>
@@ -63,6 +62,10 @@ const imageHeight = src.height;
 </style>
 
 <script>
+  import LazyLoad from "vanilla-lazyload";
+
+  const lazyLoad = new LazyLoad({});
+
   interface ImageModalElements {
     container: HTMLElement;
     thumbnail: HTMLImageElement;

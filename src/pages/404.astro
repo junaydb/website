@@ -1,13 +1,17 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
-import bliss from "../assets/owr/bliss-hardware.png";
 ---
 
 <BaseLayout title="404">
   <h1>404</h1>
   <p>Are you lost?</p>
-  <Image src={bliss} alt="Bliss artwork" loading="eager" />
+  <Image
+    src="https://ik.imagekit.io/xqhypdkfa/explorers-room/shot_01.png"
+    alt="Bliss artwork"
+    inferSize
+    loading="eager"
+  />
 </BaseLayout>
 
 <style lang="scss">

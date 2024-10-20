@@ -17,9 +17,6 @@ dependencies:
   '@astrojs/vercel':
     specifier: 8.0.0-beta.2
     version: 8.0.0-beta.2(astro@5.0.0-beta.2)
-  '@fontsource-variable/inter':
-    specifier: ^5.0.20
-    version: 5.0.20
   '@fontsource/ibm-plex-mono':
     specifier: ^5.0.13
     version: 5.0.13
@@ -519,10 +516,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@fontsource-variable/inter@5.0.20:
-    resolution: {integrity: sha512-dhzG4Zls/tIrf8h0FhTNi8jT/uFwNhdTY2vKe6DYqoXDYOfEcTVZDyh1hKml1rlLT44Y7OoKoGz8w7czDW7twQ==}
-    dev: false
 
   /@fontsource/ibm-plex-mono@5.0.13:
     resolution: {integrity: sha512-gtlMmvk//2AgDEZDFsoL5z9mgW3ZZg/9SC7pIfDwNKp5DtZpApgqd1Fua3HhPwYRIHrT76IQ1tMTzQKLEGtJGQ==}

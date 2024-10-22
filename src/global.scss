@@ -15,7 +15,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "IBM Plex Mono";
+  font-family: "IBM Plex Mono", Consolas, Monaco, 'Courier New', 'Lucida Console', monospace;
   font-weight: inherit;
   font-style: inherit;
   text-decoration: none;
@@ -49,6 +49,24 @@ a {
   font-size: 14px;
   line-height: 1.4rem;
 }
+
+.none {
+  display: none !important;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.no-space {
+  position: absolute;
+  overflow: hidden;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
 
 /* Width > 640px */
 @media (min-width: 768px) {

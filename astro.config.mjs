@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   prefetch: { prefetchAll: true },
   integrations: [mdx()],
-  image: {
-    domains: ["ik.imagekit.io"],
-  },
+  devToolbar: {
+    enabled: false
+  }
 });

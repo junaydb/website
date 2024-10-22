@@ -75,3 +75,52 @@ const { Content } = await render(post);
     }
   }
 </style>
+
+<script is:inline>
+  const containers = document.querySelectorAll(".image-modal-container");
+
+  containers.forEach((container) => {
+    const placeholder = container.querySelector(".placeholder");
+    const thumbnail = container.querySelector(".thumbnail");
+    const skeleton = container.querySelector(".loading-box");
+    const modal = container.querySelector(".modal");
+    const image = container.querySelector(".full-size");
+    const spinner = container.querySelector(".spinner");
+
+    function closeDialog() {
+      modal.close();
+      document.body.classList.remove("no-scroll");
+    }
+
+    thumbnail.addEventListener("click", () => {
+      modal.showModal();
+      document.body.classList.add("no-scroll");
+    });
+
+    modal.addEventListener("click", () => {
+      closeDialog();
+    });
+
+    image.addEventListener("click", () => {
+      closeDialog();
+    });
+
+    placeholder.addEventListener("load", () => {
+      skeleton.classList.remove("hidden");
+    });
+
+    thumbnail.addEventListener("load", () => {
+      placeholder.classList.add("none");
+      skeleton.classList.add("none");
+
+      thumbnail.classList.remove("no-space");
+      thumbnail.classList.remove("hidden");
+    });
+
+    image.addEventListener("load", () => {
+      spinner.classList.add("none");
+
+      image.classList.remove("hidden");
+    });
+  });
+</script>

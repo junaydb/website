@@ -33,15 +33,17 @@ const { Content } = await render(post);
           <>
             <h2>{row.title}</h2>
             <div class="items">
-              {row.items.map((item) =>
-                row.type == "text" ? (
-                  <p>{item}</p>
-                ) : (
-                  <a href={(item as linkRowType).href}>
-                    {(item as linkRowType).text}
-                  </a>
-                ),
-              )}
+              {row.items.map((item) => {
+                if (row.type === "text") {
+                  return <p>{item}</p>;
+                } else if (row.type === "links") {
+                  return (
+                    <a href={(item as linkRowType).href}>
+                      {(item as linkRowType).text}
+                    </a>
+                  );
+                }
+              })}
             </div>
           </>
         );

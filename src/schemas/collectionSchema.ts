@@ -17,8 +17,6 @@ const linkRow = z.object({
     .array(),
 });
 
-const textRowOrLinkRow = z.union([textRow, linkRow]);
-
 export type linkRowType = z.infer<typeof linkRow.shape.items.element>;
 
 export const collectionSchema = z.object({
@@ -34,5 +32,5 @@ export const collectionSchema = z.object({
       alt: z.string(),
     })
     .optional(),
-  rows: textRowOrLinkRow.array().optional(),
+  rows: z.union([textRow, linkRow]).array().optional(),
 });

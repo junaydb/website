@@ -1,36 +1,35 @@
 ---
+import { inferRemoteSize } from "astro:assets";
+
 interface Props {
   src: string;
   alt: string;
 }
 
 const { src, alt } = Astro.props;
+
+const { width, height } = await inferRemoteSize(src);
 ---
 
 <div class="image-modal-container">
   <div class="thumbnail-container">
-    <div class="loading-box hidden"></div>
-    <img
-      src={`${src}/tr:w-20,q-1`}
-      alt="placeholder"
-      fetchpriority="high"
-      class="placeholder hidden"
-      loading="eager"
-    />
+    <div class="loading-box"></div>
     <img
       src={`${src}/tr:w-600`}
       alt={alt}
-      class="thumbnail hidden no-space"
+      width={width}
+      height={height}
+      class="thumbnail hidden"
       loading="lazy"
       srcset={`
-${src}/tr:w-900,q-100 900w,
+${src}/tr:w-900,q-100 600w,
 ${src}/tr:w-1200,q-100 1200w
       `}
-      sizes="(max-width: 768px) 90vw, 600px"
+      sizes="(min-width: 768px) 650px, 80vw"
     />
   </div>
   <dialog class="modal">
-    <!-- spinner needs parent div because overflow: hidden apparently does not work on <span> on firefox!!!! -->
+    <!-- Spinner needs parent div because `overflow: hidden` does not work on <span> on firefox -->
     <div class="spinner-container">
       <span class="spinner"></span>
     </div>
@@ -41,7 +40,7 @@ ${src}/tr:w-1200,q-100 1200w
       loading="lazy"
       srcset={`
   ${src}/tr:w-1080,q-100 640w,
-  ${src}/tr:w-1920,q-100 1080w,
+  ${src}/tr:w-1920,q-100 1920w,
   ${src}/tr:w-2048,q-100 2048w,
   ${src}/tr:w-3840,q-100 3840w
 `}
@@ -52,25 +51,23 @@ ${src}/tr:w-1200,q-100 1200w
 </div>
 
 <style lang="scss">
+  img {
+    image-rendering: smooth;
+  }
+
   .image-modal-container {
     /* void */
   }
 
   .thumbnail-container {
     position: relative;
-    margin-top: var(--separation-margin);
-  }
-
-  .placeholder {
-    width: 100%;
+    margin-top: 10px;
   }
 
   .thumbnail {
     display: block;
-    top: 0;
-    left: 0;
     cursor: zoom-in;
-    width: 100%;
+    max-width: 100%;
     height: auto;
     vertical-align: top;
   }
@@ -167,4 +164,70 @@ ${src}/tr:w-1200,q-100 1200w
       transform: rotate(360deg);
     }
   }
+
+  .none {
+    display: none !important;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .no-scroll {
+    overflow: hidden;
+  }
 </style>
+
+<script>
+  const containers = document.querySelectorAll(".image-modal-container");
+
+  containers.forEach((container) => {
+    const thumbnail = container.querySelector(".thumbnail") as HTMLImageElement;
+    const skeleton = container.querySelector(".loading-box") as HTMLDivElement;
+    const modal = container.querySelector(".modal") as HTMLDialogElement;
+    const image = container.querySelector(".full-size") as HTMLImageElement;
+    const spinner = container.querySelector(".spinner") as HTMLSpanElement;
+
+    function closeDialog() {
+      modal.close();
+      document.body.classList.remove("no-scroll");
+    }
+
+    thumbnail.addEventListener("click", () => {
+      modal.showModal();
+      document.body.classList.add("no-scroll");
+    });
+
+    modal.addEventListener("click", () => {
+      closeDialog();
+    });
+
+    image.addEventListener("click", () => {
+      closeDialog();
+    });
+
+    if (thumbnail.complete) {
+      skeleton.classList.add("none");
+
+      thumbnail.classList.remove("hidden");
+    } else {
+      thumbnail.addEventListener("load", () => {
+        skeleton.classList.add("none");
+
+        thumbnail.classList.remove("hidden");
+      });
+    }
+
+    if (image.complete) {
+      spinner.classList.add("none");
+
+      image.classList.remove("hidden");
+    } else {
+      image.addEventListener("load", () => {
+        spinner.classList.add("none");
+
+        image.classList.remove("hidden");
+      });
+    }
+  });
+</script>

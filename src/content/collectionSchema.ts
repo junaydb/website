@@ -23,6 +23,7 @@ export const collectionSchema = z.object({
   // required
   title: z.string(),
   order: z.number(),
+  published: z.boolean(),
 
   // optionals
   layout: z.string().optional(),
@@ -32,5 +33,6 @@ export const collectionSchema = z.object({
       alt: z.string(),
     })
     .optional(),
+  description: z.string().optional(),
   rows: z.union([textRow, linkRow]).array().optional(),
 });

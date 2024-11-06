@@ -1,64 +1,134 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from "@/astro/BaseLayout.astro";
+import { getAllCollectionNames } from "@/getAllCollectionNames";
 import { getCollection } from "astro:content";
-import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
 
 const allCollectionNames = getAllCollectionNames();
+
 const allCollections = await Promise.all(
   allCollectionNames.map((name) => getCollection(name)),
 );
-
 allCollections.forEach((collection) => {
   collection.sort((a, b) => a.data.order - b.data.order);
 });
+
+const artstationBaseUrl = "https://artstation.com/artwork";
 ---
 
 <BaseLayout title="Home">
-  <div class="posts section">
-    {
-      allCollections.map((collection, i) => {
-        return (
-          <div>
-            <h2>{allCollectionNames[i]}</h2>
-            {collection.map((post) => (
-              <div class={post.collection}>
-                <a href={`${post.collection}/${post.id}`}>{post.data.title}</a>
-              </div>
-            ))}
-          </div>
-        );
-      })
-    }
+  <!-- <div class="section"> -->
+  <!--   { -->
+  <!--     allCollections.map((collection, i) => { -->
+  <!--       return ( -->
+  <!--         <div> -->
+  <!--           <h2>{allCollectionNames[i]}</h2> -->
+  <!--           <div class="post-links"> -->
+  <!--             {collection.map((post) => { -->
+  <!--               if (post.data.published) { -->
+  <!--                 return ( -->
+  <!--                   <a class="post-link" href={`${post.collection}/${post.id}`}> -->
+  <!--                     {post.data.title} -->
+  <!--                     <div class="arrow"> -->
+  <!--                       <img src="/rightArrowIcon.svg" /> -->
+  <!--                     </div> -->
+  <!--                   </a> -->
+  <!--                 ); -->
+  <!--               } -->
+  <!--             })} -->
+  <!--           </div> -->
+  <!--         </div> -->
+  <!--       ); -->
+  <!--     }) -->
+  <!--   } -->
+  <!-- </div> -->
+
+  <div class="section">
+    <h2>Art</h2>
+    <div class="post-links">
+      <a class="post-link" href={`${artstationBaseUrl}/PXLgzZ`} target="_blank">
+        Ready or Not
+        <img src="/externalLinkIcon.svg" />
+      </a>
+      <a
+        class="post-link"
+        href="https://www.behance.net/gallery/100441451/GBA-SP-(CGI)"
+        target="_blank"
+      >
+        GBA SP
+        <img src="/externalLinkIcon.svg" />
+      </a>
+      <a class="post-link" href={`${artstationBaseUrl}/r9EAoL`} target="_blank">
+        Explorer's Room
+        <img src="/externalLinkIcon.svg" />
+      </a>
+      <a class="post-link" href={`${artstationBaseUrl}/Poqmo3`} target="_blank">
+        SNES
+        <img src="/externalLinkIcon.svg" />
+      </a>
+    </div>
   </div>
+
   <div>
     <h2>Contact</h2>
-    <p>contact@junayd.com</p>
+    <p>contact@junaydb.com</p>
   </div>
 </BaseLayout>
 
 <style lang="scss">
-  .posts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
   .section {
     margin-bottom: var(--separation-margin);
   }
 
-  a {
-    display: block;
+  .post-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .post-link {
+    display: flex;
+    gap: 6px;
+    align-items: center;
     width: fit-content;
-    padding: var(--heading-margin) var(--inset-margin) var(--heading-margin)
-      var(--inset-margin);
-    margin: 0px 0px 0px calc(var(--inset-margin) * -1);
-    border: 1px solid transparent;
+    padding: var(--link-padding);
     border-radius: var(--border-radius-bg);
-    transition: all 0.1s;
+    background-color: #f8f8f8;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.3)
+    );
+    box-shadow:
+      rgba(255, 255, 255, 0.5) 0 1px 0 inset,
+      rgba(0, 0, 0, 0.05) 0 1px 1px;
+    box-sizing: border-box;
+    transition: all 0.15s ease-in-out;
 
     &:hover {
-      background-color: rgb(31, 31, 31);
-      border: 1px solid rgb(46, 46, 46);
+      background-color: #f0f0f0;
+      border-color: #e8e8e8;
+      background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.4)
+      );
+    }
+
+    &:hover .arrow {
+      transform: translateX(4px);
+      margin-right: 4px;
+    }
+  }
+
+  .arrow {
+    display: flex;
+    z-index: 1;
+    transition: all 0.15s ease-in-out;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      margin-bottom: var(--separation-margin);
     }
   }
 </style>

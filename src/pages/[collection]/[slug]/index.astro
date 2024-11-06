@@ -1,17 +1,20 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from "@/astro/BaseLayout.astro";
+import { getAllCollectionNames } from "@/getAllCollectionNames";
+import type { linkRowType } from "@/content/collectionSchema";
 import { getCollection, render } from "astro:content";
-import { getAllCollectionNames } from "@helpers/getAllCollectionNames";
-import type { linkRowType } from "@schemas/collectionSchema";
 
 export async function getStaticPaths() {
   const allCollections = await Promise.all(
     getAllCollectionNames().map((name) => getCollection(name)),
   );
-  return allCollections.flat().map((post) => ({
-    params: { collection: post.collection, slug: post.id },
-    props: { post },
-  }));
+  return allCollections
+    .flat()
+    .filter((post) => post.data.published)
+    .map((post) => ({
+      params: { collection: post.collection, slug: post.id },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;
@@ -20,7 +23,6 @@ const { Content } = await render(post);
 
 <BaseLayout title={post.data.title}>
   <div class="section">
-    <h2>Title</h2>
     <h1>
       {post.data.title}
     </h1>
@@ -50,11 +52,37 @@ const { Content } = await render(post);
       })
     }
   </div>
-  <h2>Description</h2>
-  <Content />
+
+  {
+    post.data.description ? (
+      <div class="section">
+        <h2>Description</h2>
+        <p class="prose">{post.data.description}</p>
+      </div>
+    ) : null
+  }
+
+  <div class="markdown">
+    <Content />
+  </div>
 </BaseLayout>
 
-<style lang="scss">
+<style>
+  h1 {
+    font-size: 18px;
+  }
+
+  .prose {
+    font-family: "Inter Variable", sans-serif;
+  }
+
+  .markdown {
+    p {
+      font-family: "Inter Variable", sans-serif;
+      margin: 10px 0 10px 0;
+    }
+  }
+
   .section {
     margin-bottom: var(--separation-margin);
   }
@@ -67,62 +95,19 @@ const { Content } = await render(post);
     a {
       font-size: 13px;
       text-align: center;
-      padding: var(--heading-margin) var(--inset-margin) var(--heading-margin)
-        var(--inset-margin);
-      margin: 0px calc(var(--inset-margin) * -1) px 0px
-        calc(var(--inset-margin) * -1);
-      background-color: rgb(31, 31, 31);
-      border: 1px solid rgb(46, 46, 46);
+      padding: var(--link-padding);
       border-radius: var(--border-radius-bg);
+      background-color: #f8f8f8;
+      background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.8),
+        rgba(235, 255, 255, 0.3)
+      );
+      box-shadow:
+        rgba(255, 255, 255, 0.5) 0 1px 0 inset,
+        rgba(0, 0, 0, 0.05) 0 1px 1px;
+      box-sizing: border-box;
+      transition: all 0.15s ease-in-out;
     }
   }
 </style>
-
-<script is:inline>
-  const containers = document.querySelectorAll(".image-modal-container");
-
-  containers.forEach((container) => {
-    const placeholder = container.querySelector(".placeholder");
-    const thumbnail = container.querySelector(".thumbnail");
-    const skeleton = container.querySelector(".loading-box");
-    const modal = container.querySelector(".modal");
-    const image = container.querySelector(".full-size");
-    const spinner = container.querySelector(".spinner");
-
-    function closeDialog() {
-      modal.close();
-      document.body.classList.remove("no-scroll");
-    }
-
-    thumbnail.addEventListener("click", () => {
-      modal.showModal();
-      document.body.classList.add("no-scroll");
-    });
-
-    modal.addEventListener("click", () => {
-      closeDialog();
-    });
-
-    image.addEventListener("click", () => {
-      closeDialog();
-    });
-
-    placeholder.addEventListener("load", () => {
-      skeleton.classList.remove("hidden");
-    });
-
-    thumbnail.addEventListener("load", () => {
-      placeholder.classList.add("none");
-      skeleton.classList.add("none");
-
-      thumbnail.classList.remove("no-space");
-      thumbnail.classList.remove("hidden");
-    });
-
-    image.addEventListener("load", () => {
-      spinner.classList.add("none");
-
-      image.classList.remove("hidden");
-    });
-  });
-</script>

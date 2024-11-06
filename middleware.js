@@ -7,7 +7,7 @@ import { get } from "@vercel/edge-config";
 
 export default async function middleware(request) {
   if (process.env.PRODUCTION) {
-    if ((await get("maintenance")) == "1") {
+    if ((await get("maintenance")) == 1) {
       return rewrite(new URL("/maintenance", request.url));
     }
   }

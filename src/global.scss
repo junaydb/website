@@ -1,13 +1,10 @@
 :root {
-  --primary-colour: rgb(220, 220, 220);
-  --secondary-colour: rgb(10, 10, 10);
-  --accent-colour: #ff0000;
-  --border-radius: 1px;
+  --primary-colour: #555;
+  --accent-colour: #c5f6f0;
   --border-radius-bg: 6px;
-  --link-padding: 8px 12px 8px 12px;
-  --separation-margin: 22px;
+  --link-padding: 6px 12px 6px 12px;
+  --separation-margin: 30px;
   --heading-margin: 6px;
-  --inset-margin: 8px;
 }
 
 * {
@@ -15,8 +12,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "IBM Plex Mono", Consolas, Monaco, 'Courier New', 'Lucida Console', monospace;
-  font-weight: inherit;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
   font-style: inherit;
   text-decoration: none;
   list-style-type: none;
@@ -29,9 +26,9 @@
 
 body {
   margin: auto;
-  margin-top: 4vh;
-  width: 90%;
-  background-color: var(--secondary-colour);
+  width: 80%;
+  background: linear-gradient(to bottom, #f5f5f5 25%, #c5f6f0);
+  min-height: 100vh;
 }
 
 footer {
@@ -46,35 +43,11 @@ h2 {
 
 p,
 a {
-  font-size: 14px;
-  line-height: 1.4rem;
+  font-size: 15px;
 }
 
-.none {
-  display: none !important;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-.no-space {
-  position: absolute;
-  overflow: hidden;
-}
-
-.no-scroll {
-  overflow: hidden;
-}
-
-
-/* Width > 640px */
 @media (min-width: 768px) {
-  * {
-    font-size: 15px;
-  }
-
   body {
-    width: 600px;
+    width: 650px;
   }
 }

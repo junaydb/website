@@ -1,20 +1,25 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
+import BaseLayout from "@/astro/BaseLayout.astro";
+
+const src = "https://ik.imagekit.io/xqhypdkfa/owr/bliss-hardware.png";
 ---
 
-<BaseLayout title="404">
+<BaseLayout title="BACK SOON">
   <h1>404</h1>
   <p>Are you lost?</p>
-  <Image
-    src="https://ik.imagekit.io/xqhypdkfa/owr/bliss-hardware.png"
+  <img
+    src={`${src}/tr:w-600`}
     alt="Bliss artwork"
-    inferSize
     loading="eager"
+    srcset={`
+${src}/tr:w-600,q-100 600w,
+${src}/tr:w-1200,q-100 1200w
+      `}
+    sizes="(max-width: 768px) 90vw, 600px"
   />
 </BaseLayout>
 
-<style lang="scss">
+<style>
   h1 {
     font-size: 32px;
   }
@@ -26,6 +31,5 @@ import { Image } from "astro:assets";
   img {
     width: 100%;
     height: auto;
-    border-radius: var(--border-radius);
   }
 </style>

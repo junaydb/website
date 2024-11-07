@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "@/astro/BaseLayout.astro";
+import Tag from "@/astro/Tag.astro";
 import { getAllCollectionNames } from "@/getAllCollectionNames";
-import type { linkRowType } from "@/content/collectionSchema";
+import type { textRowType, linkRowType } from "@/content/collectionSchema";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -37,12 +38,13 @@ const { Content } = await render(post);
             <div class="items">
               {row.items.map((item) => {
                 if (row.type === "text") {
-                  return <p>{item}</p>;
+                  return <Tag text={item as textRowType} />;
                 } else if (row.type === "links") {
                   return (
-                    <a href={(item as linkRowType).href}>
-                      {(item as linkRowType).text}
-                    </a>
+                    <Tag
+                      text={(item as linkRowType).text}
+                      href={(item as linkRowType).href}
+                    />
                   );
                 }
               })}
@@ -91,23 +93,5 @@ const { Content } = await render(post);
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    p,
-    a {
-      font-size: 13px;
-      text-align: center;
-      padding: var(--link-padding);
-      border-radius: var(--border-radius-bg);
-      background-color: #f8f8f8;
-      background-image: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.8),
-        rgba(235, 255, 255, 0.3)
-      );
-      box-shadow:
-        rgba(255, 255, 255, 0.5) 0 1px 0 inset,
-        rgba(0, 0, 0, 0.05) 0 1px 1px;
-      box-sizing: border-box;
-      transition: all 0.15s ease-in-out;
-    }
   }
 </style>

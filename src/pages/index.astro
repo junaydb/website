@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/astro/BaseLayout.astro";
+import LinkButton from "@/astro/LinkButton.astro";
 import { getAllCollectionNames } from "@/getAllCollectionNames";
 import { getCollection } from "astro:content";
 
@@ -26,12 +27,10 @@ const artstationBaseUrl = "https://artstation.com/artwork";
   <!--             {collection.map((post) => { -->
   <!--               if (post.data.published) { -->
   <!--                 return ( -->
-  <!--                   <a class="post-link" href={`${post.collection}/${post.id}`}> -->
-  <!--                     {post.data.title} -->
-  <!--                     <div class="arrow"> -->
-  <!--                       <img src="/rightArrowIcon.svg" /> -->
-  <!--                     </div> -->
-  <!--                   </a> -->
+  <!--                   <LinkButton -->
+  <!--                     text={post.data.title} -->
+  <!--                     href={`${post.collection}/${post.id}`} -->
+  <!--                   /> -->
   <!--                 ); -->
   <!--               } -->
   <!--             })} -->
@@ -45,26 +44,34 @@ const artstationBaseUrl = "https://artstation.com/artwork";
   <div class="section">
     <h2>Art</h2>
     <div class="post-links">
-      <a class="post-link" href={`${artstationBaseUrl}/PXLgzZ`} target="_blank">
-        Ready or Not
-        <img src="/externalLinkIcon.svg" />
-      </a>
-      <a
-        class="post-link"
+      <LinkButton
+        text="Ready or Not"
+        href={`${artstationBaseUrl}/PXLgzZ`}
+        external
+      />
+      <LinkButton
+        text="GBA SP"
         href="https://www.behance.net/gallery/100441451/GBA-SP-(CGI)"
-        target="_blank"
-      >
-        GBA SP
-        <img src="/externalLinkIcon.svg" />
-      </a>
-      <a class="post-link" href={`${artstationBaseUrl}/r9EAoL`} target="_blank">
-        Explorer's Room
-        <img src="/externalLinkIcon.svg" />
-      </a>
-      <a class="post-link" href={`${artstationBaseUrl}/Poqmo3`} target="_blank">
-        SNES
-        <img src="/externalLinkIcon.svg" />
-      </a>
+        external
+      />
+      <LinkButton
+        text="Explorer's Room"
+        href={`${artstationBaseUrl}/r9EAoL`}
+        external
+      />
+      <LinkButton text="SNES" href={`${artstationBaseUrl}/Poqmo3`} external />
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Online</h2>
+    <div class="post-links">
+      <LinkButton
+        text="Github"
+        href="https://github.com/junaydb"
+        icon="/GithubLogo.svg"
+        external
+      />
     </div>
   </div>
 
@@ -83,52 +90,5 @@ const artstationBaseUrl = "https://artstation.com/artwork";
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-  }
-
-  .post-link {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    width: fit-content;
-    padding: var(--link-padding);
-    border-radius: var(--border-radius-bg);
-    background-color: #f8f8f8;
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.3)
-    );
-    box-shadow:
-      rgba(255, 255, 255, 0.5) 0 1px 0 inset,
-      rgba(0, 0, 0, 0.05) 0 1px 1px;
-    box-sizing: border-box;
-    transition: all 0.15s ease-in-out;
-
-    &:hover {
-      background-color: #f0f0f0;
-      border-color: #e8e8e8;
-      background-image: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.9),
-        rgba(255, 255, 255, 0.4)
-      );
-    }
-
-    &:hover .arrow {
-      transform: translateX(4px);
-      margin-right: 4px;
-    }
-  }
-
-  .arrow {
-    display: flex;
-    z-index: 1;
-    transition: all 0.15s ease-in-out;
-  }
-
-  @media (min-width: 768px) {
-    .section {
-      margin-bottom: var(--separation-margin);
-    }
   }
 </style>

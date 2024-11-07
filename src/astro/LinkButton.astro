@@ -13,13 +13,18 @@ const { text, href, external } = Astro.props;
   external ? (
     <a class="post-link" href={href} target="_blank">
       {text}
-      <img src="/externalLinkIcon.svg" />
+      <img
+        src="/externalLinkIcon.svg"
+        alt="Opens in new tab"
+        width="15"
+        height="15"
+      />
     </a>
   ) : (
     <a class="post-link" href={href}>
       {text}
       <div class="arrow">
-        <img src="/rightArrowIcon.svg" />
+        <img src="/rightArrowIcon.svg" alt="Opens in the same tab" />
       </div>
     </a>
   )

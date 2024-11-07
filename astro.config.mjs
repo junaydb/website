@@ -5,6 +5,11 @@ export default defineConfig({
   prefetch: { prefetchAll: true },
   integrations: [mdx()],
   devToolbar: {
-    enabled: false
-  }
+    enabled: false,
+  },
+  vite: {
+    resolve: {
+      preserveSymlinks: true,
+    },
+  },
 });

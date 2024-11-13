@@ -17,29 +17,29 @@ const artstationBaseUrl = "https://artstation.com/artwork";
 ---
 
 <BaseLayout title="Home">
-  <!-- <div class="section"> -->
-  <!--   { -->
-  <!--     allCollections.map((collection, i) => { -->
-  <!--       return ( -->
-  <!--         <div> -->
-  <!--           <h2>{allCollectionNames[i]}</h2> -->
-  <!--           <div class="post-links"> -->
-  <!--             {collection.map((post) => { -->
-  <!--               if (post.data.published) { -->
-  <!--                 return ( -->
-  <!--                   <LinkButton -->
-  <!--                     text={post.data.title} -->
-  <!--                     href={`${post.collection}/${post.id}`} -->
-  <!--                   /> -->
-  <!--                 ); -->
-  <!--               } -->
-  <!--             })} -->
-  <!--           </div> -->
-  <!--         </div> -->
-  <!--       ); -->
-  <!--     }) -->
-  <!--   } -->
-  <!-- </div> -->
+  <div class="section">
+    {
+      allCollections.map((collection, i) => {
+        return (
+          <div>
+            <h2>{allCollectionNames[i]}</h2>
+            <div class="post-links">
+              {collection.map((post) => {
+                if (post.data.published) {
+                  return (
+                    <LinkButton
+                      text={post.data.title}
+                      href={`${post.collection}/${post.id}`}
+                    />
+                  );
+                }
+              })}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
 
   <div class="section">
     <h2>Art</h2>

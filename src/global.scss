@@ -1,5 +1,5 @@
 :root {
-  --primary-colour: #555;
+  --primary-colour: #222;
   --accent-colour: #c5f6f0;
   --border-radius-bg: 6px;
   --link-padding: 6px 12px 6px 12px;
@@ -25,7 +25,7 @@
 }
 
 html {
-  background: linear-gradient(180deg, #f5f5f5 25%, rgba(197, 246, 240));
+  background: linear-gradient(180deg, rgb(240, 240, 240) 25%, hsl(173, 36, 60));
   min-height: 100%;
 }
 

@@ -21,7 +21,6 @@ if (src.includes("imagekit")) {
     {
       optimise ? (
         <img
-          decoding="async"
           src={`${src}/tr:w-600`}
           alt={alt}
           width={width}
@@ -36,7 +35,6 @@ ${src}/tr:w-1200,q-100 1200w
         />
       ) : (
         <img
-          decoding="async"
           src={src}
           alt={alt}
           width={width}

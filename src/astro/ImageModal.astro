@@ -50,19 +50,32 @@ ${src}/tr:w-1200,q-100 1200w
     <div class="spinner-container">
       <span class="spinner"></span>
     </div>
-    <img
-      src={`${src}/tr:w-1200`}
-      alt={alt}
-      class="full-size hidden"
-      loading="lazy"
-      srcset={`
+    {
+      optimise ? (
+        <img
+          src={`${src}/tr:w-1200`}
+          alt={alt}
+          class="full-size hidden"
+          loading="lazy"
+          srcset={`
   ${src}/tr:w-1080,q-100 640w,
   ${src}/tr:w-1920,q-100 1920w,
   ${src}/tr:w-2048,q-100 2048w,
   ${src}/tr:w-3840,q-100 3840w
 `}
-      sizes="100vw"
-    />
+          sizes="100vw"
+        />
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          class="full-size hidden"
+          loading="lazy"
+        />
+      )
+    }
     <div class="modal-background"></div>
   </dialog>
 </div>

@@ -1,0 +1,31 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="inline-link" href={href} target="_blank">
+  <slot />
+  <img
+    src="/externalLinkIcon.svg"
+    alt="Opens in new tab"
+    width="15"
+    height="15"
+  />
+</a>
+
+<style lang="scss">
+  .inline-link {
+    font-family: "Noto Sans", sans-serif;
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    width: fit-content;
+    border-radius: var(--border-radius-bg);
+    box-sizing: border-box;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

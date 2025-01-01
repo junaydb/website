@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@/astro/BaseLayout.astro";
 import Tag from "@/astro/Tag.astro";
+import ImageModal from "@/astro/ImageModal.astro";
+import InlineLink from "@/astro/InlineLink.astro";
 import { getAllCollectionNames } from "@/getAllCollectionNames";
 import type { textRowType, linkRowType } from "@/content/collectionSchema";
 import { getCollection, render } from "astro:content";
@@ -40,12 +42,8 @@ const { Content } = await render(post);
                 if (row.type === "text") {
                   return <Tag text={item as textRowType} />;
                 } else if (row.type === "links") {
-                  return (
-                    <Tag
-                      text={(item as linkRowType).text}
-                      href={(item as linkRowType).href}
-                    />
-                  );
+                  const link = item as linkRowType;
+                  return <Tag text={link.text} href={link.href} />;
                 }
               })}
             </div>
@@ -65,7 +63,7 @@ const { Content } = await render(post);
   }
 
   <div class="markdown">
-    <Content />
+    <Content components={{ a: InlineLink, img: ImageModal }} />
   </div>
 </BaseLayout>
 
@@ -75,14 +73,25 @@ const { Content } = await render(post);
   }
 
   .prose {
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans", Verdana, Geneva, Tahoma, sans-serif;
   }
 
   .markdown {
     p {
-      font-family: "Noto Sans", sans-serif;
+      font-family: "Noto Sans", Verdana, Geneva, Tahoma, sans-serif;
       font-size: 16px;
       margin: 10px 0 10px 0;
+    }
+
+    p > code {
+      font-size: 14px;
+      padding: 2px 4px 2px 4px;
+      border-radius: var(--border-radius-bg);
+      background-color: #f9f9f9;
+      box-shadow:
+        rgba(255, 255, 255, 0.5) 0 1px 0 inset,
+        rgba(0, 0, 0, 0.125) 0 1px 1px;
+      box-sizing: border-box;
     }
   }
 

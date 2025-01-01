@@ -5,6 +5,7 @@ const textRow = z.object({
   title: z.string(),
   items: z.string().array(),
 });
+
 const linkRow = z.object({
   type: z.literal("links"),
   title: z.string(),
@@ -17,7 +18,9 @@ const linkRow = z.object({
 });
 
 export type textRowType = z.infer<typeof textRow.shape.items.element>;
+
 export type linkRowType = z.infer<typeof linkRow.shape.items.element>;
+
 export const collectionSchema = z.object({
   // required
   title: z.string(),

@@ -1,74 +1,53 @@
 ---
 import BaseLayout from "@/astro/BaseLayout.astro";
 import LinkButton from "@/astro/LinkButton.astro";
-import { getAllCollectionNames } from "@/getAllCollectionNames";
 import { getCollection } from "astro:content";
 
-const allCollectionNames = getAllCollectionNames();
-
-const allCollections = await Promise.all(
-  allCollectionNames.map((name) => getCollection(name)),
-);
-allCollections.forEach((collection) => {
-  collection.sort((a, b) => a.data.order - b.data.order);
-});
-
-const artstationBaseUrl = "https://artstation.com/artwork";
+const posts = await getCollection("posts");
+const sections = await getCollection("sections");
 ---
 
 <BaseLayout title="Home">
   <div class="section">
-    {
-      allCollections.map((collection, i) => {
+    <div>
+      <h2>Posts</h2>
+      <div class="post-links">
+        {
+          posts.map((post) => {
+            if (post.data.published) {
+              return (
+                <LinkButton
+                  text={post.data.title}
+                  href={`${post.collection}/${post.id}`}
+                />
+              );
+            }
+          })
+        }
+      </div>
+    </div>
+  </div>
+
+  {
+    sections.map((section) => {
+      const enabled = section.data.items.filter((item) => item.enabled);
+
+      console.log(enabled);
+
+      if (enabled.length > 0) {
         return (
-          <div>
-            <h2>{allCollectionNames[i]}</h2>
+          <div class="section">
+            <h2>{section.id}</h2>
             <div class="post-links">
-              {collection.map((post) => {
-                if (post.data.published) {
-                  return (
-                    <LinkButton
-                      text={post.data.title}
-                      href={`${post.collection}/${post.id}`}
-                    />
-                  );
-                }
-              })}
+              {section.data.items.map((item) => (
+                <LinkButton text={item.title} href={item.href} external />
+              ))}
             </div>
           </div>
         );
-      })
-    }
-  </div>
-
-  <div class="section">
-    <h2>Art</h2>
-    <div class="post-links">
-      <LinkButton
-        text="Ready or Not"
-        href={`${artstationBaseUrl}/PXLgzZ`}
-        external
-      />
-      <LinkButton
-        text="GBA SP"
-        href="https://www.behance.net/gallery/100441451/GBA-SP-(CGI)"
-        external
-      />
-      <LinkButton
-        text="Explorer's Room"
-        href={`${artstationBaseUrl}/r9EAoL`}
-        external
-      />
-      <LinkButton text="SNES" href={`${artstationBaseUrl}/Poqmo3`} external />
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Online</h2>
-    <div class="post-links">
-      <LinkButton text="Github" href="https://github.com/junaydb" external />
-    </div>
-  </div>
+      }
+    })
+  }
 
   <div>
     <h2>Contact</h2>

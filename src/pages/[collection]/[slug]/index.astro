@@ -3,15 +3,13 @@ import BaseLayout from "@/astro/BaseLayout.astro";
 import Tag from "@/astro/Tag.astro";
 import ImageModal from "@/astro/ImageModal.astro";
 import InlineLink from "@/astro/InlineLink.astro";
-import { getAllCollectionNames } from "@/getAllCollectionNames";
-import type { textRowType, linkRowType } from "@/content/collectionSchema";
+import type { textRowType, linkRowType } from "@/content/postSchema";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const allCollections = await Promise.all(
-    getAllCollectionNames().map((name) => getCollection(name)),
-  );
-  return allCollections
+  const posts = await getCollection("posts");
+
+  return posts
     .flat()
     .filter((post) => post.data.published)
     .map((post) => ({
@@ -68,6 +66,14 @@ const { Content } = await render(post);
 </BaseLayout>
 
 <style>
+  html {
+    background: linear-gradient(
+      180deg,
+      rgb(240, 240, 240) 25%,
+      hsl(173, 36%, 90%)
+    );
+  }
+
   h1 {
     font-size: 18px;
   }

@@ -21,7 +21,7 @@ export type textRowType = z.infer<typeof textRow.shape.items.element>;
 
 export type linkRowType = z.infer<typeof linkRow.shape.items.element>;
 
-export const collectionSchema = z.object({
+export const postSchema = z.object({
   // required
   title: z.string(),
   order: z.number(),

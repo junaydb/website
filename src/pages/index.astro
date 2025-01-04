@@ -32,8 +32,6 @@ const sections = await getCollection("sections");
     sections.map((section) => {
       const enabled = section.data.items.filter((item) => item.enabled);
 
-      console.log(enabled);
-
       if (enabled.length > 0) {
         return (
           <div class="section">

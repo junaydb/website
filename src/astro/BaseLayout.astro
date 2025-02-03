@@ -1,5 +1,7 @@
 ---
-import "global.scss";
+import "style/global.scss";
+import ThemeToggle from "./ThemeToggle.astro";
+import Footer from "./Footer.astro";
 
 interface Props {
   title: string;
@@ -11,10 +13,44 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <script is:inline>
+      const theme = (() => {
+        const localStorageTheme = localStorage?.getItem("theme") ?? "";
+
+        if (["dark", "light"].includes(localStorageTheme)) {
+          return localStorageTheme;
+        }
+
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+
+      localStorage.setItem("theme", theme);
+
+      window.addEventListener("storage", (event) => {
+        if (event.key === "theme") {
+          const isDark = event.newValue === "dark";
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        }
+      });
+    </script>
     <meta charset="UTF-8" />
     <meta
       name="description"
-      content="Sharing stuff I make and sometimes writing about things I learn."
+      content="Sharing stuff I make and things I learn."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,19 +63,13 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <nav>
-      <a href="/">JUNAYD</a>
-    </nav>
-
     <main>
+      <nav>
+        <a href="/">JUNAYD BHOYROO</a>
+        <ThemeToggle />
+      </nav>
       <slot />
     </main>
-    <footer></footer>
+    <Footer />
   </body>
 </html>
-
-<style lang="scss">
-  nav {
-    margin: 50px 0 var(--separation-margin) 0;
-  }
-</style>

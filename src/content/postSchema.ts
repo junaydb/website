@@ -24,6 +24,7 @@ export type linkRowType = z.infer<typeof linkRow.shape.items.element>;
 export const postSchema = z.object({
   // required
   title: z.string(),
+  date: z.date(),
   order: z.number(),
   published: z.boolean(),
 

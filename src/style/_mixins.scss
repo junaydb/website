@@ -1,0 +1,40 @@
+@mixin aero-button-light($hover, $border: true) {
+  background-color: rgb(234, 234, 234);
+  background-image: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.9) 40%,
+      rgba(205, 255, 255, 0.3) 60%);
+  box-shadow:
+    rgba(255, 255, 255, 0.8) 0 1px 0 inset,
+    rgba(0, 0, 0, 0.05) 0 1px 1px;
+
+  @if $border {
+    border: 1px solid rgba(130, 130, 130, 0.3);
+  }
+
+  @if $hover {
+    &:hover {
+      background-color: rgb(224, 224, 224);
+    }
+  }
+}
+
+@mixin aero-button-dark($hover, $border: true) {
+  border: 1px solid rgba(130, 130, 130, 0.3);
+  background-color: rgb(40, 40, 40);
+  background-image: linear-gradient(180deg,
+      rgba(100, 100, 100, 0.7) 40%,
+      rgba(60, 60, 60, 0.3) 60%);
+  box-shadow: rgba(150, 150, 150, 0.7) 0 1px 0 inset,
+    rgba(0, 0, 0, 0.05) 0 1px 1px;
+
+  @if $border {
+    border: 1px solid rgba(130, 130, 130, 0.3);
+  }
+
+
+  @if $hover {
+    &:hover {
+      background-color: rgb(25, 25, 25);
+    }
+  }
+}

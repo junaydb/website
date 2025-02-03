@@ -1,0 +1,53 @@
+<button id="theme-toggle" type="button">
+  <div></div>
+</button>
+
+<style lang="scss">
+  @use "../style/mixins" as *;
+
+  button {
+    padding: 0;
+    margin: 0;
+    height: 15px;
+    width: 40px;
+    border: 1px solid rgba(120, 120, 120, 0.2);
+    border-radius: var(--border-radius-bg);
+    background-color: rgba(120, 120, 120, 0.4);
+    box-sizing: border-box;
+    cursor: pointer;
+
+    div {
+      position: relative;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      border-radius: var(--border-radius-bg);
+      box-sizing: border-box;
+      transition: left 0.05s ease-out;
+
+      @include aero-button-light(true, false);
+    }
+  }
+
+  html.dark button {
+    border: 1px solid rgba(210, 210, 210, 0.2);
+
+    div {
+      left: 50%;
+
+      @include aero-button-dark(true, false);
+    }
+  }
+</style>
+
+<script is:inline>
+  const handleToggleClick = () => {
+    document.documentElement.classList.toggle("dark");
+    const isDark = document.documentElement.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
+
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener("click", handleToggleClick);
+</script>

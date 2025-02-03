@@ -15,11 +15,21 @@ const sections = await getCollection("sections");
         {
           posts.map((post) => {
             if (post.data.published) {
+              const date = new Date(post.data.date);
+              const dateString =
+                date.toLocaleString("default", { month: "short" }) +
+                " " +
+                date.getDay() +
+                ", " +
+                date.getFullYear();
               return (
-                <LinkButton
-                  text={post.data.title}
-                  href={`${post.collection}/${post.id}`}
-                />
+                <div>
+                  <LinkButton
+                    text={post.data.title}
+                    href={`${post.collection}/${post.id}`}
+                  />
+                  <p>{dateString}</p>
+                </div>
               );
             }
           })
@@ -46,11 +56,6 @@ const sections = await getCollection("sections");
       }
     })
   }
-
-  <div>
-    <h2>Contact</h2>
-    <p>contact@junaydb.com</p>
-  </div>
 </BaseLayout>
 
 <style lang="scss">
@@ -62,9 +67,13 @@ const sections = await getCollection("sections");
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    padding: 4px;
-    margin: -4px;
-    background: rgba(98, 200, 170, 0.075);
-    border-radius: 8px;
+    border-radius: 5px;
+
+    div {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 </style>

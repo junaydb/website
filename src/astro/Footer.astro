@@ -1,0 +1,49 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <p>
+    © {year} Junayd Bhoyroo.
+    <a href="mailto:contact@junaydb.com">Mail</a>.
+    <a href="https://github.com/junaydb/website/tree/main" target="_blank"
+      >Source</a
+    >.
+  </p>
+</footer>
+
+<style lang="scss">
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid rgba(190, 190, 190, 0.5);
+    background-color: rgb(230, 230, 230);
+    align-self: flex-end;
+    justify-self: flex-end;
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a,
+    p {
+      color: rgb(170, 170, 180);
+      font-size: 12px;
+    }
+  }
+
+  html.dark footer {
+    border-color: rgba(55, 55, 55, 0.5);
+    background-color: rgb(15, 15, 15);
+
+    a,
+    p {
+      color: rgb(55, 55, 55);
+      font-size: 12px;
+    }
+  }
+</style>

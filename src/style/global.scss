@@ -1,0 +1,124 @@
+:root {
+  --primary-colour: black;
+  --border-radius-bg: 1px;
+  --link-padding: 6px 12px 6px 12px;
+  --separation-margin: 30px;
+}
+
+* {
+  color: var(--primary-colour);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-style: inherit;
+  text-decoration: none;
+  list-style-type: none;
+  text-overflow: ellipsis;
+  transition: background-color 0.1s ease-out, filter 0.1s ease-out;
+}
+
+html {
+  min-height: 100dvh;
+  background: rgb(238, 238, 238);
+}
+
+html.dark {
+  --primary-colour: rgb(237, 237, 237);
+  background: rgb(20, 20, 20);
+}
+
+html.dark body {
+  background-color: rgb(20, 20, 20);
+}
+
+html.dark .svg-icon {
+  filter: invert(96%);
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  height: 100%;
+  margin: 0 auto;
+  width: 85%;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 50px 0 var(--separation-margin) 0;
+}
+
+h2 {
+  font-size: 13px;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+p,
+a {
+  font-size: 13px;
+}
+
+.astro-code {
+  font-size: 12.6px;
+  margin-bottom: 16px;
+  padding: 10px;
+  padding-left: 14px;
+  border: 1px solid rgba(120, 120, 120, 0.3);
+  border-radius: var(--border-radius-bg);
+  overflow-x: auto;
+  text-overflow: clip;
+
+  span {
+    font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+    font-weight: 500;
+  }
+
+  code {
+    counter-reset: step;
+    counter-increment: step 0;
+  }
+
+  code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: rgba(115, 138, 148, .4)
+  }
+}
+
+html.dark .astro-code,
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+@media (min-width: 768px) {
+  main {
+    width: 688px;
+  }
+
+  p,
+  a {
+    font-size: 14px;
+  }
+
+  .astro-code {
+    font-size: 13.6px;
+  }
+}

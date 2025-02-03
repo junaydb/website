@@ -66,14 +66,6 @@ const { Content } = await render(post);
 </BaseLayout>
 
 <style>
-  html {
-    background: linear-gradient(
-      180deg,
-      rgb(240, 240, 240) 25%,
-      hsl(173, 36%, 90%)
-    );
-  }
-
   h1 {
     font-size: 18px;
   }
@@ -83,14 +75,21 @@ const { Content } = await render(post);
   }
 
   .markdown {
+    margin-bottom: 20px;
+
     p {
+      margin-bottom: 16px;
+    }
+
+    p,
+    a {
       font-family: "Noto Sans", Verdana, Geneva, Tahoma, sans-serif;
-      font-size: 16px;
-      margin: 10px 0 10px 0;
+      font-size: 14px;
     }
 
     p > code {
-      font-size: 14px;
+      font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
+      font-size: 12px;
       padding: 2px 4px 2px 4px;
       border-radius: var(--border-radius-bg);
       background-color: #f9f9f9;
@@ -98,6 +97,15 @@ const { Content } = await render(post);
         rgba(255, 255, 255, 0.5) 0 1px 0 inset,
         rgba(0, 0, 0, 0.125) 0 1px 1px;
       box-sizing: border-box;
+    }
+  }
+
+  html.dark .markdown {
+    p > code {
+      background-color: rgb(40, 40, 40);
+      box-shadow:
+        rgba(120, 120, 120, 0.5) 0 1px 0 inset,
+        rgba(0, 0, 0, 0.125) 0 1px 1px;
     }
   }
 
@@ -109,5 +117,17 @@ const { Content } = await render(post);
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .markdown {
+      p,a  {
+        font-size: 16px;
+      }
+
+      p > code {
+        font-size: 13.5px;
+      }
+    }
   }
 </style>

@@ -17,57 +17,38 @@ const { text, href, external } = Astro.props;
         alt="Opens in new tab"
         width="15"
         height="15"
+        class="svg-icon"
       />
     </a>
   ) : (
     <a class="post-link" href={href}>
       {text}
-      <div class="arrow">
-        <img src="/rightArrowIcon.svg" alt="Opens in the same tab" />
-      </div>
+      <img
+        src="/rightArrowIcon.svg"
+        alt="Opens in the same tab"
+        class="svg-icon"
+      />
     </a>
   )
 }
 
 <style lang="scss">
+  @use "../style/mixins" as *;
+
   .post-link {
     display: flex;
+    max-width: 70%;
     gap: 6px;
     align-items: center;
     width: fit-content;
     padding: var(--link-padding);
     border-radius: var(--border-radius-bg);
-    background-color: #fafafa;
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.3)
-    );
-    box-shadow:
-      rgba(255, 255, 255, 0.8) 0 1px 0 inset,
-      rgba(0, 0, 0, 0.05) 0 1px 1px;
     box-sizing: border-box;
-    transition: all 0.15s ease-in-out;
 
-    &:hover {
-      background-color: #f0f0f0;
-      border-color: #e8e8e8;
-      background-image: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.9),
-        rgba(235, 255, 255, 0.3)
-      );
-    }
-
-    &:hover .arrow {
-      transform: translateX(4px);
-      /* margin-right: 4px; */
-    }
+    @include aero-button-light(true);
   }
 
-  .arrow {
-    display: flex;
-    z-index: 1;
-    transition: all 0.15s ease-in-out;
+  html.dark .post-link {
+    @include aero-button-dark(true);
   }
 </style>

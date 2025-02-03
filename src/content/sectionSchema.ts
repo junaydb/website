@@ -12,9 +12,9 @@ export const sectionSchema = z.object({
   id: z.string(),
   items: z
     .object({
-      enabled: z.boolean(),
       title: z.string(),
       href: z.string().url(),
+      enabled: z.boolean(),
     })
     .array(),
 });

@@ -19,20 +19,34 @@ const { text, href } = Astro.props;
 
 <style>
   .item {
+    width: fit-content;
     font-size: 13px;
     text-align: center;
     padding: var(--link-padding);
+    border: 1px solid rgba(160, 160, 160, 0.5);
     border-radius: var(--border-radius-bg);
-    background-color: #f8f8f8;
+    box-shadow:
+      rgba(255, 255, 255, 0.8) 0 1px 0 inset,
+      rgba(0, 0, 0, 0.05) 0 1px 1px;
+    box-sizing: border-box;
+    background-color: #eaeaea;
     background-image: linear-gradient(
       180deg,
-      rgba(250, 250, 250, 0.8) 30%,
-      rgba(116, 190, 181, 0.3)
+      rgba(255, 255, 255, 0.9) 40%,
+      rgba(205, 255, 255, 0.3) 60%
+    );
+  }
+
+  html.dark .item {
+    background-color: rgb(40, 40, 40);
+    border: 1px solid rgba(80, 80, 80, 0.2);
+    background-image: linear-gradient(
+      180deg,
+      rgba(120, 120, 120, 0.9) 40%,
+      rgba(60, 60, 60, 0.3) 60%
     );
     box-shadow:
-      rgba(255, 255, 255, 0.5) 0 1px 0 inset,
-      rgba(0, 0, 0, 0.125) 0 1px 1px;
-    box-sizing: border-box;
-    transition: all 0.15s ease-in-out;
+      rgba(150, 150, 150, 0.7) 0 1px 0 inset,
+      rgba(0, 0, 0, 0.05) 0 1px 1px;
   }
 </style>

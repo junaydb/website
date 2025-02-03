@@ -6,7 +6,10 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     shikiConfig: {
-      theme: "vitesse-light",
+      themes: {
+        light: "vitesse-light",
+        dark: "dracula",
+      },
     },
   },
   devToolbar: {

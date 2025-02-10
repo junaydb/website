@@ -5,38 +5,44 @@ import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts");
 const sections = await getCollection("sections");
+
+const postsEnabled = posts.filter((post) => post.data.published).length > 0;
 ---
 
 <BaseLayout title="Home">
-  <div class="section">
-    <div>
-      <h2>Posts</h2>
-      <div class="post-links">
-        {
-          posts.map((post) => {
-            if (post.data.published) {
-              const date = new Date(post.data.date);
-              const dateString =
-                date.toLocaleString("default", { month: "short" }) +
-                " " +
-                date.getDay() +
-                ", " +
-                date.getFullYear();
-              return (
-                <div>
-                  <LinkButton
-                    text={post.data.title}
-                    href={`${post.collection}/${post.id}`}
-                  />
-                  <p>{dateString}</p>
-                </div>
-              );
-            }
-          })
-        }
-      </div>
-    </div>
-  </div>
+  {
+    postsEnabled && (
+      <>
+        <h2>Posts</h2>
+        <div class="section">
+          <div>
+            <div class="post-links">
+              {posts.map((post) => {
+                if (post.data.published) {
+                  const date = new Date(post.data.date);
+                  const dateString =
+                    date.toLocaleString("default", { month: "short" }) +
+                    " " +
+                    date.getDay() +
+                    ", " +
+                    date.getFullYear();
+                  return (
+                    <div>
+                      <LinkButton
+                        text={post.data.title}
+                        href={`${post.collection}/${post.id}`}
+                      />
+                      <p>{dateString}</p>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
 
   {
     sections.map((section) => {

@@ -1,36 +1,56 @@
 ---
 import BaseLayout from "@/astro/BaseLayout.astro";
-
-const src =
-  "https://ik.imagekit.io/xqhypdkfa/explorers-room/initial_blockout.png";
 ---
 
-<BaseLayout title="BACK SOON">
-  <h1>Back soon</h1>
-  <p>This site is under maintenance.</p>
-  <img
-    src={`${src}/tr:w-600`}
-    alt="Wireframes"
-    loading="eager"
-    srcset={`
-${src}/tr:w-600,q-100 600w,
-${src}/tr:w-1200,q-100 1200w
-      `}
-    sizes="(max-width: 768px) 90vw, 600px"
-  />
+<BaseLayout title="BACK SOON" hideNav={true}>
+  <div class="container">
+    <div class="blink-anim">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        width="20"
+        height="20"
+        style="margin-right: 8px;"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <p class="prose">This site is currently private</p>
+  </div>
 </BaseLayout>
 
 <style>
-  h1 {
-    font-size: 32px;
-  }
-
   p {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
-  img {
-    width: 100%;
-    height: auto;
+  svg {
+    margin-top: 0.2rem;
+  }
+
+  .container {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blink-anim {
+    animation: blink 1.3s step-start infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    49.9% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
   }
 </style>

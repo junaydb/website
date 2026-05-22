@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/astro/BaseLayout.astro";
+import ActionListItem from "@/react/ActionListItem";
+import Grid from "@/react/Grid";
+import Icons from "@/react/Icons";
+import { getCollection } from "astro:content";
+
+let posts = (await getCollection("posts")).filter(
+  (post) => post.data.published,
+);
+---
+
+<BaseLayout>
+  <Grid>
+    <h2>Bio</h2>
+    <p>
+      London-based software engineer who is constantly learning through
+      building. I currently spend my time on independent projects, with a focus
+      on back-end engineering and fintech, but my projects span a range of
+      areas. I'm also a 3D artist with past experience in the games industry.
+    </p>
+  </Grid>
+
+  <Grid>
+    <h2>Projects</h2>
+    {
+      posts.map((post) => (
+        <ActionListItem
+          href={`${post.collection}/${post.id}`}
+          icon={Icons.rightArrow()}
+        >
+          {post.data.title}
+        </ActionListItem>
+      ))
+    }
+  </Grid>
+</BaseLayout>
+
+<style>
+  h2 {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    text-transform: uppercase;
+  }
+</style>

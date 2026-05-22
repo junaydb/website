@@ -1,0 +1,15 @@
+.root {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-weight: 400;
+  margin: 0;
+  outline: 0;
+  border: 0;
+  font-family: var(--font-family-mono);
+  min-height: calc(var(--line-height-base, var(--line-height-base, 1.25)) * var(--font-size, 1rem));
+  text-transform: uppercase;
+  transition: 200ms ease all;
+  background: var(--theme-border, rgba(120, 120, 120, 0.2));
+  padding: 0 1ch 0 1ch;
+}

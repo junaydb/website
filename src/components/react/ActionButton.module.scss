@@ -1,0 +1,60 @@
+.hotkey {
+  background: var(--theme-button-foreground, rgba(120, 120, 120, 0.18));
+  color: var(--theme-text, var(--primary-colour, currentColor));
+  cursor: pointer;
+  flex-shrink: 0;
+  font-weight: 400;
+  padding: 0 1ch;
+  text-indent: 0;
+  user-select: none;
+}
+
+.content {
+  background: var(--theme-button-background, rgba(120, 120, 120, 0.1));
+  box-shadow: inset 0 0 0 2px var(--theme-button-foreground, rgba(120, 120, 120, 0.18));
+  cursor: pointer;
+  flex-shrink: 0;
+  font-weight: 400;
+  padding: 0 1ch;
+  text-indent: 0;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.root {
+  align-items: center;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-family: var(--font-family-mono, inherit);
+  font-size: var(--font-size, inherit);
+  justify-content: space-between;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+
+  &:hover .hotkey,
+  &:focus .hotkey,
+  &:active .hotkey {
+    background: var(--theme-focused-foreground, rgba(120, 120, 120, 0.35));
+  }
+
+  &:hover .content,
+  &:focus .content,
+  &:active .content {
+    box-shadow: inset 0 0 0 2px var(--theme-focused-foreground, rgba(120, 120, 120, 0.35));
+  }
+
+  &:focus,
+  &:active {
+    background: var(--theme-focused-foreground, rgba(120, 120, 120, 0.35));
+  }
+}
+
+.selected {
+  .content {
+    background: var(--theme-focused-foreground, rgba(120, 120, 120, 0.35));
+  }
+}

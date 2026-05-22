@@ -1,0 +1,4 @@
+.grid {
+  display: block;
+  padding: calc(var(--font-size, 1rem) * var(--line-height-base, var(--line-height-base, 1.25))) 2ch calc(var(--font-size, 1rem) * var(--line-height-base, var(--line-height-base, 1.25))) 2ch;
+}

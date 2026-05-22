@@ -1,0 +1,29 @@
+---
+import BaseLayout from "@/astro/BaseLayout.astro";
+import Grid from "@/components/react/Grid";
+
+const src = "https://ik.imagekit.io/xqhypdkfa/owr/bliss-hardware.png";
+---
+
+<BaseLayout title="BACK SOON">
+  <Grid>
+    <h1>404 Not Found</h1>
+    <br />
+    <p>Are you lost?</p>
+    <br />
+    <img
+      src={`${src}/tr:w-1200`}
+      alt="Bliss artwork"
+      loading="eager"
+      sizes="(max-width: 768px) 90vw, 600px"
+    />
+  </Grid>
+</BaseLayout>
+
+<style>
+  img {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(100, 100, 100, 0.4);
+  }
+</style>

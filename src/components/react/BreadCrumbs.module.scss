@@ -1,0 +1,46 @@
+.root {
+  display: inline-block;
+}
+
+.line {
+  display: inline-block;
+  line-height: calc(var(--theme-line-height-base) * 1rem);
+}
+
+.link {
+  background: var(--theme-border);
+  border: 0;
+  color: var(--theme-text);
+  display: inline-block;
+  outline: 0;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--theme-focused-foreground);
+    color: var(--theme-text);
+  }
+
+  &:visited {
+    color: var(--theme-text);
+  }
+
+  &:focus {
+    background: var(--theme-focused-foreground);
+  }
+
+  &:active {
+    background: var(--theme-focused-foreground);
+  }
+}
+
+.current {
+  background: var(--theme-border);
+  color: var(--theme-text);
+  display: inline-block;
+}
+
+.symbol {
+  display: inline-block;
+  margin: 0 1ch;
+  min-width: 1ch;
+}

@@ -1,0 +1,74 @@
+---
+import BaseLayout from "@/astro/BaseLayout.astro";
+import ImageModal from "@/astro/ImageModal.astro";
+import InlineLink from "@/astro/InlineLink.astro";
+import Grid from "@/react/Grid";
+import Paragraph from "@/astro/Paragraph.astro";
+import Subheader from "@/astro/Subheader.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+
+  return posts
+    .flat()
+    .filter((post) => post.data.published)
+    .map((post) => ({
+      params: { collection: post.collection, slug: post.id },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { description, meta } = post.data;
+---
+
+<BaseLayout
+  title={post.data.title}
+  breadcrumbItems={[
+    { name: "Junayd Bhoyroo", url: "/" },
+    { name: "Posts"},
+    { name: post.data.title },
+  ]}
+>
+  <Grid>
+    <h2>Summary</h2>
+    <Paragraph>{description}</Paragraph>
+
+    {
+      meta && meta.length > 0 && (
+        <>
+          <h2>Links</h2>
+          <ul>
+            {meta.map((row) =>
+              row.type === "links" ? (
+                row.items.map((item) => (
+                  <li>
+                    <InlineLink href={item.href}>{item.text}</InlineLink>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  {row.text}: {row.items.join(", ")}
+                </li>
+              ),
+            )}
+          </ul>
+        </>
+      )
+    }
+  </Grid>
+
+  <Grid>
+    <Content
+      components={{
+        p: Paragraph,
+        a: InlineLink,
+        img: ImageModal,
+        h2: Subheader,
+        // pre: CodeBlock,
+      }}
+    />
+  </Grid>
+</BaseLayout>

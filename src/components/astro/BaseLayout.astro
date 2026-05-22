@@ -1,0 +1,118 @@
+---
+import "global.scss";
+import Font from "astro/components/Font.astro";
+import BreadCrumbs from "@/react/BreadCrumbs";
+import Grid from "@/react/Grid";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface BreadcrumbItem {
+  url?: string;
+  name: string;
+}
+
+interface Props {
+  title?: string;
+  breadcrumbItems?: BreadcrumbItem[];
+  hideBackgroundGrid?: boolean;
+}
+
+const { title, breadcrumbItems } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      const theme = (() => {
+        const localStorageTheme = localStorage?.getItem("theme") ?? "";
+
+        if (["dark", "light"].includes(localStorageTheme)) {
+          return localStorageTheme;
+        }
+
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+
+      localStorage.setItem("theme", theme);
+
+      window.addEventListener("storage", (event) => {
+        if (event.key === "theme") {
+          const isDark = event.newValue === "dark";
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        }
+      });
+    </script>
+    <Font cssVariable="--font-jetbrains-mono" />
+    <Font cssVariable="--font-ibm-plex-mono" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="Junayd Bhoyroo's portfolio" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title ?? "Junayd Bhoyroo"}</title>
+  </head>
+  <body>
+    <main>
+      <Grid>
+        {
+          breadcrumbItems ? (
+            <BreadCrumbs items={breadcrumbItems} />
+          ) : (
+            <a href="/">Junayd Bhoyroo</a>
+          )
+        }
+        <!-- <ThemeToggle /> -->
+      </Grid>
+      <slot />
+    </main>
+    <div class="bg-grid"></div>
+  </body>
+</html>
+
+<style>
+  :global(body) {
+    position: relative;
+    max-width: none;
+  }
+
+  main {
+    max-width: 80ch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bg-grid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    margin: 0px;
+    background-image:
+      repeating-linear-gradient(
+        rgba(120, 120, 120, 0.1) 0 1px,
+        transparent 1px 100%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(120, 120, 120, 0.1) 0 1px,
+        transparent 1px 100%
+      );
+    background-size: 1ch 1.25rem;
+    pointer-events: none;
+    display: block;
+  }
+</style>

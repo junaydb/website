@@ -6,16 +6,15 @@ interface Props {
 const { href } = Astro.props;
 ---
 
-<a class="inline-link" href={href} target="_blank">
-  <slot />
-  <img
+<a class="inline-link" href={href} target="_blank"
+  ><slot /><img
     src="/externalLinkIcon.svg"
     alt="Opens in new tab"
     width="15"
     height="15"
     class="svg-icon"
-  />
-</a>
+  /></a
+>
 
 <style>
   .inline-link {

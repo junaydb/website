@@ -29,12 +29,16 @@ export default defineConfig({
       name: "JetBrains Mono",
       cssVariable: "--font-jetbrains-mono",
       weights: [400],
+      fallbacks: ["monospace"],
+      display: "swap",
     },
     {
       provider: fontProviders.fontsource(),
       name: "IBM Plex Mono",
       cssVariable: "--font-ibm-plex-mono",
       weights: [500],
+      fallbacks: ["monospace"],
+      display: "swap",
     },
   ],
 });

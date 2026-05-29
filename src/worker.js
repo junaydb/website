@@ -5,11 +5,17 @@ export default {
       const maintenanceEnabled = value === "true";
 
       const url = new URL(request.url);
+      const isStaging = url.includes("staging");
       const isMaintenancePage =
         url.pathname === "/maintenance" || url.pathname === "/maintenance/";
       const acceptsHtml = request.headers.get("accept")?.includes("text/html");
 
-      if (maintenanceEnabled && acceptsHtml && !isMaintenancePage) {
+      if (
+        !isStaging &&
+        maintenanceEnabled &&
+        acceptsHtml &&
+        !isMaintenancePage
+      ) {
         url.pathname = "/maintenance";
         url.search = "";
 

@@ -157,7 +157,13 @@ ${src}/tr:w-1200,q-100 1200w
   }
 
   .spinner-container {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
     overflow: hidden;
+    pointer-events: none;
   }
 
   @keyframes rotation {

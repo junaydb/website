@@ -2,6 +2,7 @@
 import BaseLayout from "@/astro/BaseLayout.astro";
 import ImageModal from "@/astro/ImageModal.astro";
 import InlineLink from "@/astro/InlineLink.astro";
+import Badge from "@/react/Badge";
 import Grid from "@/react/Grid";
 import Paragraph from "@/astro/Paragraph.astro";
 import Subheader from "@/astro/Subheader.astro";
@@ -22,13 +23,15 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const { description, meta } = post.data;
+const links = meta?.find((row) => row.type === "links")?.items ?? [];
+const topics = meta?.find((row) => row.type === "tags")?.items ?? [];
 ---
 
 <BaseLayout
   title={post.data.title}
   breadcrumbItems={[
     { name: "Junayd Bhoyroo", url: "/" },
-    { name: "Posts"},
+    { name: "Posts" },
     { name: post.data.title },
   ]}
 >
@@ -36,26 +39,29 @@ const { description, meta } = post.data;
     <h2>Summary</h2>
     <Paragraph>{description}</Paragraph>
 
+    {topics.length > 0 && <h2>Topics</h2>}
     {
-      meta && meta.length > 0 && (
-        <>
-          <h2>Links</h2>
-          <ul>
-            {meta.map((row) =>
-              row.type === "links" ? (
-                row.items.map((item) => (
-                  <li>
-                    <InlineLink href={item.href}>{item.text}</InlineLink>
-                  </li>
-                ))
-              ) : (
-                <li>
-                  {row.text}: {row.items.join(", ")}
-                </li>
-              ),
-            )}
-          </ul>
-        </>
+      topics.length > 0 && (
+        <Paragraph>
+          <div class="topics">
+            {topics.map((topic) => (
+              <Badge>{topic}</Badge>
+            ))}
+          </div>
+        </Paragraph>
+      )
+    }
+
+    {links.length > 0 && <h2>Links</h2>}
+    {
+      links.length > 0 && (
+        <Paragraph>
+          {links.map((item) => (
+            <>
+              <InlineLink href={item.href}>{item.text}</InlineLink>
+            </>
+          ))}
+        </Paragraph>
       )
     }
   </Grid>
@@ -72,3 +78,11 @@ const { description, meta } = post.data;
     />
   </Grid>
 </BaseLayout>
+
+<style>
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>

@@ -3,8 +3,7 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const tags = z.object({
-  type: z.literal("tag"),
-  text: z.string(),
+  type: z.literal("tags"),
   items: z.string().array(),
 });
 

@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "portfolio",
-  "main": "src/worker.ts",
+  "main": "src/worker.js",
   "compatibility_date": "2026-05-24",
   "assets": {
     "directory": "./dist",
@@ -9,7 +9,10 @@
     "run_worker_first": true,
     "not_found_handling": "404-page"
   },
-  "vars": {
-    "MAINTENANCE": "0",
-  }
+  "kv_namespaces": [
+    {
+      "binding": "CONFIG_STORE",
+      "id": "624056c21f4541abb07c66e98c781a86"
+    }
+  ]
 }

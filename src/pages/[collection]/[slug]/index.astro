@@ -2,6 +2,7 @@
 import BaseLayout from "@/astro/BaseLayout.astro";
 import ImageModal from "@/astro/ImageModal.astro";
 import InlineLink from "@/astro/InlineLink.astro";
+import ListItem from "@/astro/ListItem.astro";
 import Badge from "@/react/Badge";
 import Grid from "@/react/Grid";
 import Paragraph from "@/astro/Paragraph.astro";
@@ -9,7 +10,7 @@ import Subheader from "@/astro/Subheader.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+  const posts = await getCollection("projects");
 
   return posts
     .flat()
@@ -31,7 +32,7 @@ const topics = meta?.find((row) => row.type === "tags")?.items ?? [];
   title={post.data.title}
   breadcrumbItems={[
     { name: "Junayd Bhoyroo", url: "/" },
-    { name: "Posts" },
+    { name: post.collection[0].toUpperCase() + post.collection.slice(1) },
     { name: post.data.title },
   ]}
 >
@@ -73,6 +74,7 @@ const topics = meta?.find((row) => row.type === "tags")?.items ?? [];
         a: InlineLink,
         img: ImageModal,
         h2: Subheader,
+        li: ListItem,
         // pre: CodeBlock,
       }}
     />

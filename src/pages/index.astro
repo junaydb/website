@@ -5,7 +5,7 @@ import Grid from "@/react/Grid";
 import Icons from "@/react/Icons";
 import { getCollection } from "astro:content";
 
-let posts = (await getCollection("posts")).filter(
+let posts = (await getCollection("projects")).filter(
   (post) => post.data.published,
 );
 ---

@@ -17,7 +17,7 @@ const links = z.object({
     .array(),
 });
 
-export const postSchema = z.object({
+export const projectPostSchema = z.object({
   title: z.string(),
   description: z.string(),
   date: z.date(),
@@ -26,9 +26,9 @@ export const postSchema = z.object({
   meta: z.union([tags, links]).array().optional(),
 });
 
-const posts = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./posts" }),
-  schema: postSchema,
+const projects = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./posts/projects" }),
+  schema: projectPostSchema,
 });
 
-export const collections = { posts };
+export const collections = { projects };

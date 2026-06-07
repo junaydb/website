@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/astro/BaseLayout.astro";
+import Contents from "@/astro/Contents.astro";
 import ImageModal from "@/astro/ImageModal.astro";
 import InlineLink from "@/astro/InlineLink.astro";
 import ListItem from "@/astro/ListItem.astro";
@@ -22,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const { description, meta } = post.data;
 const links = meta?.find((row) => row.type === "links")?.items ?? [];
 const topics = meta?.find((row) => row.type === "tags")?.items ?? [];
@@ -65,6 +66,8 @@ const topics = meta?.find((row) => row.type === "tags")?.items ?? [];
         </Paragraph>
       )
     }
+
+    <Contents headings={headings} />
   </Grid>
 
   <Grid>

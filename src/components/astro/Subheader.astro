@@ -1,4 +1,12 @@
+---
+interface Props {
+  id?: string;
+}
+
+const props = Astro.props;
+---
+
 <br />
-<h2>
+<h2 {...props}>
   <slot />
 </h2>

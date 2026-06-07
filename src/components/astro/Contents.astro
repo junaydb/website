@@ -1,0 +1,58 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const links = headings.filter((heading) => heading.slug && heading.text);
+---
+
+{
+  links.length > 0 && (
+    <nav aria-labelledby="contents-heading" class="contents">
+      <h2 id="contents-heading">Contents</h2>
+      <ol>
+        {links.map((heading) => (
+          <li style={`--depth: ${Math.max(0, heading.depth - 2)}`}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .contents {
+    margin-bottom: calc(var(--theme-line-height-base) * 1rem);
+  }
+
+  .contents ol {
+    counter-reset: contents-item;
+    text-indent: 0;
+  }
+
+  .contents li {
+    counter-increment: contents-item;
+    list-style: none;
+    margin-left: calc(var(--depth) * 2ch);
+    padding-left: 3ch;
+    position: relative;
+    text-indent: 0;
+  }
+
+  .contents li::before {
+    content: counter(contents-item) ".";
+    position: absolute;
+    right: calc(100% - 2ch);
+    text-align: right;
+    width: 2ch;
+  }
+
+  .contents a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

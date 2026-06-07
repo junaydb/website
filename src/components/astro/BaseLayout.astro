@@ -71,7 +71,7 @@ const { title, breadcrumbItems } = Astro.props;
           breadcrumbItems ? (
             <BreadCrumbs items={breadcrumbItems} />
           ) : (
-            <a href="/">Junayd Bhoyroo</a>
+            <BreadCrumbs items={[{ name: "Junayd Bhoyroo", url: "/" }]} />
           )
         }
         <!-- <ThemeToggle /> -->

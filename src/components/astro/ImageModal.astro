@@ -86,7 +86,8 @@ ${src}/tr:w-1200,q-100 1200w
 
   .thumbnail-container {
     position: relative;
-    width: min(100%, 80ch, calc(40ch * 16 / 9));
+    height: calc(var(--theme-line-height-base) * 30ch);
+    max-width: 80ch;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: var(--theme-border);

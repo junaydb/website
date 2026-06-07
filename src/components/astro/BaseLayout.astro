@@ -3,7 +3,6 @@ import "global.scss";
 import Font from "astro/components/Font.astro";
 import BreadCrumbs from "@/react/BreadCrumbs";
 import Grid from "@/react/Grid";
-import ThemeToggle from "./ThemeToggle.astro";
 
 interface BreadcrumbItem {
   url?: string;
@@ -96,7 +95,7 @@ const { title, breadcrumbItems } = Astro.props;
   }
 
   .bg-grid {
-    --bg-grid-line: rgba(96, 96, 96, 0.03);
+    --bg-grid-line: rgba(96, 96, 96, 0.02);
 
     position: absolute;
     top: 0;
@@ -115,7 +114,7 @@ const { title, breadcrumbItems } = Astro.props;
         var(--bg-grid-line) 0 1px,
         transparent 1px 100%
       );
-    background-size: 1ch 1.25rem;
+    background-size: 1ch calc(var(--theme-line-height-base) * 1rem);
     pointer-events: none;
     display: block;
   }

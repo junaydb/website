@@ -7,7 +7,7 @@
   outline: 0;
   border: 0;
   font-family: var(--font-family-mono);
-  min-height: calc(var(--line-height-base, var(--line-height-base, 1.25)) * var(--font-size, 1rem));
+  min-height: calc(var(--theme-line-height-base, var(--theme-line-height-base, 1.25)) * var(--font-size, 1rem));
   text-transform: uppercase;
   transition: 200ms ease all;
   background: var(--theme-border, rgba(120, 120, 120, 0.2));

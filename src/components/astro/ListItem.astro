@@ -1,0 +1,47 @@
+<li class="content-list-item">
+  <slot />
+</li>
+
+<style>
+  :global(ol:has(> .content-list-item)) {
+    counter-reset: content-list-item;
+  }
+
+  .content-list-item {
+    --list-marker-gap: 1ch;
+    --list-marker-width: 2ch;
+
+    list-style: none;
+    margin-left: calc(var(--list-marker-width) + var(--list-marker-gap));
+    padding-left: 0;
+    position: relative;
+    text-indent: 0;
+  }
+
+  .content-list-item::before {
+    display: inline-block;
+    position: absolute;
+    right: calc(100% + var(--list-marker-gap));
+    text-align: right;
+    width: var(--list-marker-width);
+    visibility: visible;
+  }
+
+  .content-list-item > :global(code) {
+    font-size: calc(var(--font-size) * 0.95);
+    background: var(--theme-border);
+    border: solid 1px var(--theme-border-subdued);
+  }
+
+  :global(ul) > .content-list-item::before {
+    content: "▪";
+  }
+
+  :global(ol) > .content-list-item {
+    counter-increment: content-list-item;
+  }
+
+  :global(ol) > .content-list-item::before {
+    content: counters(content-list-item, ".") ".";
+  }
+</style>

@@ -5,9 +5,9 @@ import Grid from "@/react/Grid";
 import Icons from "@/react/Icons";
 import { getCollection } from "astro:content";
 
-let posts = (await getCollection("projects")).filter(
-  (post) => post.data.published,
-);
+let posts = (await getCollection("projects"))
+  .filter((post) => post.data.published)
+  .sort((a, b) => b.data.order - a.data.order);
 ---
 
 <BaseLayout>

@@ -86,13 +86,19 @@ ${src}/tr:w-1200,q-100 1200w
 
   .thumbnail-container {
     position: relative;
-    height: calc(var(--theme-line-height-base) * 30ch);
+    height: (100%, calc(var(--theme-line-height-base) * 30ch));
     max-width: min(100%, 80ch);
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: var(--theme-border);
     border: solid 1px var(--theme-border-subdued);
     cursor: zoom-in;
+  }
+
+  @media (max-width: 768px) {
+    .thumbnail-container {
+      aspect-ratio: auto;
+    }
   }
 
   .thumbnail {

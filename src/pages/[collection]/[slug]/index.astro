@@ -24,13 +24,19 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
-const { description, meta } = post.data;
-const links = meta?.find((row) => row.type === "links")?.items ?? [];
-const topics = meta?.find((row) => row.type === "tags")?.items ?? [];
+const {
+  description,
+  metaDescription,
+  links = [],
+  tags: topics = [],
+} = post.data;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <BaseLayout
   title={post.data.title}
+  metaDescription={metaDescription}
+  canonicalUrl={canonicalUrl}
   breadcrumbItems={[
     { name: "Junayd Bhoyroo", url: "/" },
     { name: post.collection[0].toUpperCase() + post.collection.slice(1) },

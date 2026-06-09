@@ -2,28 +2,21 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-const tags = z.object({
-  type: z.literal("tags"),
-  items: z.string().array(),
-});
-
-const links = z.object({
-  type: z.literal("links"),
-  items: z
+export const projectPostSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  metaDescription: z.string().max(160),
+  date: z.date(),
+  order: z.number(),
+  published: z.boolean(),
+  tags: z.string().array().optional(),
+  links: z
     .object({
       text: z.string(),
       href: z.url(),
     })
-    .array(),
-});
-
-export const projectPostSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  date: z.date(),
-  order: z.number(),
-  published: z.boolean(),
-  meta: z.union([tags, links]).array().optional(),
+    .array()
+    .optional(),
 });
 
 const projects = defineCollection({

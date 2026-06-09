@@ -1,5 +1,6 @@
 ---
 import "global.scss";
+import { OgImage } from "@imagekit/astro";
 import Font from "astro/components/Font.astro";
 import BreadCrumbs from "@/react/BreadCrumbs";
 import Grid from "@/react/Grid";
@@ -10,32 +11,24 @@ interface BreadcrumbItem {
 }
 
 interface Props {
-  title?: string;
-  breadcrumbItems?: BreadcrumbItem[];
-  hideBackgroundGrid?: boolean;
+  title: string;
+  metaDescription?: string;
+  canonicalUrl: string | URL;
+  breadcrumbItems: BreadcrumbItem[];
 }
 
-const { title, breadcrumbItems } = Astro.props;
+const {
+  title = "Junayd Bhoyroo",
+  metaDescription = "Junayd Bhoyroo's portfolio",
+  canonicalUrl = Astro.site,
+  breadcrumbItems = [{ name: "Junayd Bhoyroo", url: "/" }],
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <script is:inline>
-      // const theme = (() => {
-      //   const localStorageTheme = localStorage?.getItem("theme") ?? "";
-      //
-      //   if (["dark", "light"].includes(localStorageTheme)) {
-      //     return localStorageTheme;
-      //   }
-      //
-      //   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      //     return "dark";
-      //   }
-      //
-      //   return "light";
-      // })();
-
       const theme = "light";
 
       if (theme === "light") {
@@ -60,21 +53,22 @@ const { title, breadcrumbItems } = Astro.props;
     <Font cssVariable="--font-jetbrains-mono" preload />
     <Font cssVariable="--font-ibm-plex-mono" />
     <meta charset="UTF-8" />
-    <meta name="description" content="Junayd Bhoyroo's portfolio" />
+    <meta name="description" content={metaDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title ?? "Junayd Bhoyroo"}</title>
+    <OgImage
+      src="/web/brand-gradient.jpg"
+      alt="Brand gradient"
+      title={title}
+      description={metaDescription}
+    />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{title}</title>
   </head>
   <body>
     <main>
       <Grid>
-        {
-          breadcrumbItems ? (
-            <BreadCrumbs items={breadcrumbItems} />
-          ) : (
-            <BreadCrumbs items={[{ name: "Junayd Bhoyroo", url: "/" }]} />
-          )
-        }
-        <!-- <ThemeToggle /> -->
+        <BreadCrumbs items={breadcrumbItems} />
       </Grid>
       <slot />
     </main>

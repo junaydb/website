@@ -1,12 +1,20 @@
 import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
-
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import imagekit from "@imagekit/astro/integration";
 
 export default defineConfig({
   site: "https://junaydb.com",
   prefetch: { prefetchAll: true },
-  integrations: [mdx(), react()],
+  integrations: [
+    mdx(),
+    react(),
+    sitemap(),
+    imagekit({
+      urlEndpoint: "https://ik.imagekit.io/xqhypdkfa",
+    }),
+  ],
   markdown: {
     shikiConfig: {
       themes: {
@@ -42,3 +50,4 @@ export default defineConfig({
     },
   ],
 });
+

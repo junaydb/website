@@ -4,7 +4,6 @@ import Contents from "@/astro/Contents.astro";
 import ImageModal from "@/astro/ImageModal.astro";
 import InlineLink from "@/astro/InlineLink.astro";
 import ListItem from "@/astro/ListItem.astro";
-import Badge from "@/react/Badge";
 import Grid from "@/react/Grid";
 import Paragraph from "@/astro/Paragraph.astro";
 import Subheader from "@/astro/Subheader.astro";
@@ -24,12 +23,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
-const {
-  description,
-  metaDescription,
-  links = [],
-  tags: topics = [],
-} = post.data;
+const { description, metaDescription, links = [] } = post.data;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -46,19 +40,6 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
   <Grid>
     <h2>Summary</h2>
     <Paragraph>{description}</Paragraph>
-
-    {topics.length > 0 && <h2>Topics</h2>}
-    {
-      topics.length > 0 && (
-        <Paragraph>
-          <div class="topics">
-            {topics.map((topic) => (
-              <Badge>{topic}</Badge>
-            ))}
-          </div>
-        </Paragraph>
-      )
-    }
 
     {links.length > 0 && <h2>Links</h2>}
     {
@@ -84,7 +65,6 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
         img: ImageModal,
         h2: Subheader,
         li: ListItem,
-        // pre: CodeBlock,
       }}
     />
   </Grid>

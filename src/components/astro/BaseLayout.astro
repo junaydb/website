@@ -29,7 +29,7 @@ const {
 <html lang="en">
   <head>
     <script is:inline>
-      const theme = "light";
+      const theme = "dark";
 
       if (theme === "light") {
         document.documentElement.classList.remove("dark");
@@ -50,8 +50,8 @@ const {
         }
       });
     </script>
-    <Font cssVariable="--font-jetbrains-mono" preload />
-    <Font cssVariable="--font-ibm-plex-mono" />
+    <Font cssVariable="--font-recursive" preload />
+    <Font cssVariable="--font-jetbrains-mono" />
     <meta charset="UTF-8" />
     <meta name="description" content={metaDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -72,7 +72,7 @@ const {
       </Grid>
       <slot />
     </main>
-    <div class="bg-grid"></div>
+    <div class="scanlines" aria-hidden="true"></div>
   </body>
 </html>
 
@@ -88,34 +88,16 @@ const {
     z-index: 1;
   }
 
-  .bg-grid {
-    --bg-grid-line: rgba(96, 96, 96, 0.02);
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 0;
-    margin: 0px;
-    background-image:
-      repeating-linear-gradient(
-        var(--bg-grid-line) 0 1px,
-        transparent 1px 100%
-      ),
-      repeating-linear-gradient(
-        90deg,
-        var(--bg-grid-line) 0 1px,
-        transparent 1px 100%
-      );
-    background-size: 1ch calc(var(--theme-line-height-base) * 1rem);
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
     pointer-events: none;
-    display: block;
-  }
-
-  @media (color-gamut: p3) {
-    .bg-grid {
-      --bg-grid-line: rgba(120, 120, 120, 0.1);
-    }
+    opacity: 0.9;
+    background: repeating-linear-gradient(
+      transparent 0 2px,
+      rgba(255, 255, 255, 0.024) 3px,
+      transparent 4px
+    );
   }
 </style>

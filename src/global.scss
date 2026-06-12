@@ -327,14 +327,16 @@ html:not(.dark) body {
 body.theme-dark,
 html.dark body {
   --theme-overlay: var(--color-black-alpha-40);
-  --theme-background: var(--color-black);
+  /* --theme-background: var(--color-black); */
+  --theme-background: #070707;
   --theme-background-modal: var(--color-gray-23);
   --theme-background-modal-footer: var(--color-gray-35);
   --theme-background-input: var(--color-gray-23);
   /* --theme-border: var(--color-gray-23); */
   --theme-border: var(--color-gray-15);
   --theme-border-subdued: var(--color-gray-23-border-alpha);
-  --theme-text: var(--color-white);
+  /* --theme-text: var(--color-white); */
+  --theme-text: #e9e6dc;
   --theme-button: var(--color-white);
   --theme-button-text: var(--color-black);
   --theme-button-foreground: var(--color-gray-15);
@@ -489,7 +491,7 @@ html.dark body.tint-pink {
 * {
   margin: 0;
   padding: 0;
-  font-family: var(--font-jetbrains-mono), monospace;
+  font-family: var(--font-recursive), monospace;
   text-overflow: ellipsis;
   text-decoration: none;
 }
@@ -529,7 +531,7 @@ p>code {
 }
 
 .astro-code {
-  font-size: 15px;
+  font-size: 14px;
   margin-bottom: 16px;
   padding: 2ch 2ch 2ch 2ch;
   border: 1px solid var(--theme-border);
@@ -537,7 +539,7 @@ p>code {
   text-overflow: clip;
 
   span {
-    font-family: var(--font-ibm-plex-mono);
+    font-family: var(--font-jetbrains-mono);
     font-weight: 500;
   }
 

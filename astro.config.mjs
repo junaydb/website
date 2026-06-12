@@ -18,8 +18,8 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       themes: {
-        light: "night-owl-light",
-        dark: "night-owl",
+        light: "github-light-high-contrast",
+        dark: "github-dark-high-contrast",
       },
     },
   },
@@ -34,20 +34,19 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: "JetBrains Mono",
-      cssVariable: "--font-jetbrains-mono",
+      name: "Recursive",
+      cssVariable: "--font-recursive",
       weights: [400],
       fallbacks: ["monospace"],
       display: "swap",
     },
     {
       provider: fontProviders.fontsource(),
-      name: "IBM Plex Mono",
-      cssVariable: "--font-ibm-plex-mono",
+      name: "JetBrains Mono",
+      cssVariable: "--font-jetbrains-mono",
       weights: [500],
       fallbacks: ["monospace"],
       display: "swap",
     },
   ],
 });
-

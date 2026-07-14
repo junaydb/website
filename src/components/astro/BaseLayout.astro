@@ -11,10 +11,10 @@ interface BreadcrumbItem {
 }
 
 interface Props {
-  title: string;
+  title?: string;
   metaDescription?: string;
-  canonicalUrl: string | URL;
-  breadcrumbItems: BreadcrumbItem[];
+  canonicalUrl?: string | URL;
+  breadcrumbItems?: BreadcrumbItem[];
 }
 
 const {

@@ -1,0 +1,40 @@
+.root {
+  display: inline-block;
+}
+
+.line {
+  display: inline-block;
+  line-height: calc(var(--theme-line-height-base) * 1rem);
+}
+
+.link {
+  display: inline-block;
+  color: var(--theme-text);
+  text-decoration: none;
+  background: var(--theme-border);
+  border: 0;
+  outline: 0;
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    color: var(--theme-text);
+    background: var(--theme-focused-foreground);
+  }
+
+  &:visited {
+    color: var(--theme-text);
+  }
+}
+
+.current {
+  display: inline-block;
+  color: var(--theme-text);
+  background: var(--theme-border);
+}
+
+.symbol {
+  display: inline-block;
+  min-width: 1ch;
+  margin: 0 1ch;
+}

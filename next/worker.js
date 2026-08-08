@@ -1,11 +1,13 @@
-export default {
-  async fetch(request, env) {
+import openNextWorker from "./.open-next/worker.js";
+
+const worker = {
+  async fetch(request, env, ctx) {
     try {
       const value = await env.CONFIG_STORE.get("maintenance");
       const maintenanceEnabled = value === "true";
 
       const url = new URL(request.url);
-      const isStaging = request.url.includes("staging");
+      const isStaging = url.hostname.includes("staging");
       const isMaintenancePage =
         url.pathname === "/maintenance" || url.pathname === "/maintenance/";
       const acceptsHtml = request.headers.get("accept")?.includes("text/html");
@@ -22,9 +24,14 @@ export default {
         return Response.redirect(url.toString(), 302);
       }
 
-      return env.ASSETS.fetch(request);
-    } catch (e) {
-      return new Response(e.message, { status: 500 });
+      return openNextWorker.fetch(request, env, ctx);
+    } catch (error) {
+      console.error("Worker request failed", error);
+      return new Response("Internal Server Error", { status: 500 });
     }
   },
 };
+
+export default worker;
+
+export { DOQueueHandler } from "./.open-next/worker.js";

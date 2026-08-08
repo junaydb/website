@@ -1,0 +1,21 @@
+.body {
+  position: relative;
+  max-width: none;
+}
+
+.main {
+  position: relative;
+  z-index: var(--z-index-page);
+  max-width: 80ch;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+  background: repeating-linear-gradient(transparent 0 2px,
+      rgba(255, 255, 255, 0.024) 3px,
+      transparent 4px);
+}

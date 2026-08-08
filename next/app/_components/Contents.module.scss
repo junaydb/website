@@ -1,0 +1,30 @@
+.contents {
+  margin-bottom: calc(var(--theme-line-height-base) * 1rem);
+}
+
+.contents ol {
+  counter-reset: contents-item;
+  text-indent: 0;
+}
+
+.contents li {
+  counter-increment: contents-item;
+  position: relative;
+  margin-left: calc(var(--depth) * 2ch);
+  padding-left: 3ch;
+  list-style: none;
+  text-indent: 0;
+}
+
+.contents li::before {
+  position: absolute;
+  right: calc(100% - 2ch);
+  width: 2ch;
+  text-align: right;
+  content: counter(contents-item) ".";
+}
+
+.contents a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

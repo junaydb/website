@@ -1,6 +1,6 @@
 .item {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
   color: var(--theme-text, var(--primary-colour, currentColor));
   text-decoration: none;
@@ -28,7 +28,9 @@
   align-items: center;
   justify-content: center;
   width: 10ch;
-  height: calc(var(--font-size, 1rem) * var(--theme-line-height-base, 1.25));
+  min-height: calc(
+    var(--font-size, 1rem) * var(--theme-line-height-base, 1.25)
+  );
   padding: 0 1ch;
   white-space: nowrap;
   user-select: none;
@@ -41,7 +43,9 @@
   align-items: center;
   justify-content: center;
   width: 3ch;
-  height: calc(var(--font-size, 1rem) * var(--theme-line-height-base, 1.25));
+  min-height: calc(
+    var(--font-size, 1rem) * var(--theme-line-height-base, 1.25)
+  );
   user-select: none;
   background: var(--theme-button-foreground, rgba(120, 120, 120, 0.18));
 }

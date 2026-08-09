@@ -2,7 +2,6 @@
 
 import { allPosts } from "content-collections";
 
-import Icons from "./_components/Icons";
 import ActionListItem from "./_components/srcl/ActionListItem";
 import Grid from "./_components/srcl/Grid";
 
@@ -26,8 +25,8 @@ export default async function HomePage() {
         <h2>Projects</h2>
         {projects.map((project) => (
           <ActionListItem
+            date={project.date}
             href={`/${project._meta.path}`}
-            icon={Icons.rightArrow()}
             key={project._meta.path}
           >
             {project.title}

@@ -12,8 +12,8 @@ import styles from "./ActionListItem.module.scss";
 
 interface ActionListItemProps {
   children?: ReactNode;
+  date: Date;
   href?: string;
-  icon?: ReactNode;
   onClick?: MouseEventHandler<HTMLDivElement | HTMLAnchorElement>;
   role?: string;
   style?: CSSProperties;
@@ -25,11 +25,24 @@ export default function ActionListItem({
   target,
   onClick,
   children,
-  icon,
+  date,
   style,
   role,
 }: ActionListItemProps) {
   const resolvedRole = role || (href ? "link" : "button");
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  })
+    .format(date)
+    .toUpperCase();
+
+  const dateElement = (
+    <time className={styles.date} dateTime={date.toISOString()}>
+      {formattedDate}
+    </time>
+  );
 
   if (href) {
     return (
@@ -42,8 +55,8 @@ export default function ActionListItem({
         tabIndex={0}
         role={resolvedRole}
       >
-        <figure className={styles.icon}>{icon}</figure>
         <span className={styles.text}>{children}</span>
+        {dateElement}
       </Link>
     );
   }
@@ -67,8 +80,8 @@ export default function ActionListItem({
       tabIndex={0}
       role={resolvedRole}
     >
-      <figure className={styles.icon}>{icon}</figure>
       <span className={styles.text}>{children}</span>
+      {dateElement}
     </div>
   );
 }

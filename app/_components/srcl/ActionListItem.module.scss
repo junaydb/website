@@ -15,20 +15,22 @@
     background: transparent;
   }
 
-  &:hover .icon,
-  &:focus .icon,
-  &:active .icon {
+  &:hover .date,
+  &:focus .date,
+  &:active .date {
     background: var(--theme-focused-foreground, rgba(120, 120, 120, 0.35));
   }
 }
 
-.icon {
+.date {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 3ch;
+  width: 10ch;
   height: calc(var(--font-size, 1rem) * var(--theme-line-height-base, 1.25));
+  padding: 0 1ch;
+  white-space: nowrap;
   user-select: none;
   background: var(--theme-button-foreground, rgba(120, 120, 120, 0.18));
 }

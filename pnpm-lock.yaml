@@ -23,6 +23,18 @@ dependencies:
   '@opennextjs/cloudflare':
     specifier: ^1.20.2
     version: 1.20.2(next@16.2.12)(wrangler@4.120.0)
+  '@shikijs/core':
+    specifier: 4.4.2
+    version: 4.4.2
+  '@shikijs/engine-javascript':
+    specifier: 4.4.2
+    version: 4.4.2
+  '@shikijs/langs':
+    specifier: 4.4.2
+    version: 4.4.2
+  '@shikijs/themes':
+    specifier: 4.4.2
+    version: 4.4.2
   '@types/mdx':
     specifier: ^2.0.14
     version: 2.0.14
@@ -47,9 +59,6 @@ dependencies:
   remark-mdx-frontmatter:
     specifier: ^5.2.0
     version: 5.2.0
-  shiki:
-    specifier: ^4.4.2
-    version: 4.4.2
   zod:
     specifier: ^4.4.3
     version: 4.4.3

@@ -1,14 +1,49 @@
+import { createHighlighterCore } from "@shikijs/core";
+import { createJavaScriptRegexEngine } from "@shikijs/engine-javascript";
+import c from "@shikijs/langs/c";
+import cpp from "@shikijs/langs/cpp";
+import go from "@shikijs/langs/go";
+import java from "@shikijs/langs/java";
+import javascript from "@shikijs/langs/javascript";
+import jsx from "@shikijs/langs/jsx";
+import python from "@shikijs/langs/python";
+import tsx from "@shikijs/langs/tsx";
+import typescript from "@shikijs/langs/typescript";
+import githubDarkHighContrast from "@shikijs/themes/github-dark-high-contrast";
+import githubLightHighContrast from "@shikijs/themes/github-light-high-contrast";
 import {
   isValidElement,
   type ComponentPropsWithoutRef,
   type ReactNode,
 } from "react";
-import {
-  bundledLanguages,
-  bundledLanguagesAlias,
-  codeToHtml,
-  type BundledLanguage,
-} from "shiki";
+
+const highlighterPromise = createHighlighterCore({
+  themes: [githubLightHighContrast, githubDarkHighContrast],
+  langs: [c, cpp, go, java, javascript, jsx, python, tsx, typescript],
+  engine: createJavaScriptRegexEngine(),
+});
+
+const languageAliases = {
+  c: "c",
+  "c++": "cpp",
+  cpp: "cpp",
+  cxx: "cpp",
+  go: "go",
+  golang: "go",
+  java: "java",
+  javascript: "javascript",
+  js: "javascript",
+  jsx: "jsx",
+  python: "python",
+  py: "python",
+  typescript: "typescript",
+  ts: "typescript",
+  tsx: "tsx",
+} as const;
+
+type SupportedLanguage =
+  | (typeof languageAliases)[keyof typeof languageAliases]
+  | "text";
 
 interface CodeElementProps {
   children?: ReactNode;
@@ -26,16 +61,19 @@ function getCode(props: ComponentPropsWithoutRef<"pre">) {
   return { code: String(children ?? ""), language };
 }
 
-function isBundledLanguage(language: string): language is BundledLanguage {
-  return language in bundledLanguages || language in bundledLanguagesAlias;
+function getLanguage(language: string): SupportedLanguage {
+  return Object.hasOwn(languageAliases, language)
+    ? languageAliases[language as keyof typeof languageAliases]
+    : "text";
 }
 
 export default async function CodeBlock(
   props: ComponentPropsWithoutRef<"pre">,
 ) {
   const { code, language } = getCode(props);
-  const html = await codeToHtml(code, {
-    lang: isBundledLanguage(language) ? language : "text",
+  const highlighter = await highlighterPromise;
+  const html = highlighter.codeToHtml(code, {
+    lang: getLanguage(language),
     themes: {
       light: "github-light-high-contrast",
       dark: "github-dark-high-contrast",

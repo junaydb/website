@@ -15,9 +15,9 @@
     background: transparent;
   }
 
-  &:hover .date,
-  &:focus .date,
-  &:active .date {
+  &:hover .icon,
+  &:focus .icon,
+  &:active .icon {
     background: var(--theme-focused-foreground, rgba(120, 120, 120, 0.35));
   }
 }
@@ -31,6 +31,17 @@
   height: calc(var(--font-size, 1rem) * var(--theme-line-height-base, 1.25));
   padding: 0 1ch;
   white-space: nowrap;
+  user-select: none;
+  background: var(--theme-button-foreground, rgba(120, 120, 120, 0.18));
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 3ch;
+  height: calc(var(--font-size, 1rem) * var(--theme-line-height-base, 1.25));
   user-select: none;
   background: var(--theme-button-foreground, rgba(120, 120, 120, 0.18));
 }

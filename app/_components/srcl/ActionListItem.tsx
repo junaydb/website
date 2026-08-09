@@ -14,6 +14,7 @@ interface ActionListItemProps {
   children?: ReactNode;
   date: Date;
   href?: string;
+  icon?: ReactNode;
   onClick?: MouseEventHandler<HTMLDivElement | HTMLAnchorElement>;
   role?: string;
   style?: CSSProperties;
@@ -26,6 +27,7 @@ export default function ActionListItem({
   onClick,
   children,
   date,
+  icon,
   style,
   role,
 }: ActionListItemProps) {
@@ -55,6 +57,7 @@ export default function ActionListItem({
         tabIndex={0}
         role={resolvedRole}
       >
+        <figure className={styles.icon}>{icon}</figure>
         <span className={styles.text}>{children}</span>
         {dateElement}
       </Link>
@@ -80,6 +83,7 @@ export default function ActionListItem({
       tabIndex={0}
       role={resolvedRole}
     >
+      <figure className={styles.icon}>{icon}</figure>
       <span className={styles.text}>{children}</span>
       {dateElement}
     </div>

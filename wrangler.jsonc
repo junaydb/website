@@ -8,5 +8,20 @@
   "assets": {
     "directory": "public",
     "binding": "ASSETS"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "junaydb.com",
+      "zone_name": "junaydb.com",
+      "custom_domain": true,
+      "enabled": true,
+      "previews_enabled": false
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "id": "624056c21f4541abb07c66e98c781a86",
+      "binding": "CONFIG_STORE"
+    }
+  ]
 }

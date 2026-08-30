@@ -10,22 +10,12 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/.open-next/
-/out/
-
 # cloudflare
 /.wrangler/
 
-# content collections
-/.content-collections/
-
-# production
-/build
+# generated output
+/build/
+/coverage/
 
 # misc
 .DS_Store
@@ -42,9 +32,5 @@ yarn-error.log*
 .dev.vars*
 !.dev.vars.example
 
-# vercel
-.vercel
-
 # typescript
 *.tsbuildinfo
-next-env.d.ts

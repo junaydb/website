@@ -1,45 +1,12 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
   "main": "worker.js",
   "name": "portfolio",
   "compatibility_date": "2026-08-08",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS",
-    "run_worker_first": true,
-    "not_found_handling": "404-page",
-  },
-  "kv_namespaces": [
-    {
-      "binding": "CONFIG_STORE",
-      "id": "624056c21f4541abb07c66e98c781a86",
-    },
-  ],
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "portfolio",
-    },
-  ],
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "portfolio-opennext-cache",
-    },
-  ],
-  "durable_objects": {
-    "bindings": [
-      {
-        "name": "NEXT_CACHE_DO_QUEUE",
-        "class_name": "DOQueueHandler",
-      },
-    ],
-  },
-  "migrations": [
-    {
-      "tag": "v1",
-      "new_sqlite_classes": ["DOQueueHandler"],
-    },
-  ],
+    "directory": "public",
+    "binding": "ASSETS"
+  }
 }

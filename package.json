@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "cf-preview": "wrangler dev",
+    "cf-build": "wrangler deploy",
     "cf-deploy": "wrangler deploy"
   },
   "devDependencies": {
